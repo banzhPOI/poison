@@ -21,4 +21,9 @@ public class RabbitMqConstants {
      */
     public static final String TEST_ROUTING_KEY = "test_routing_key";
 
+    /**
+     * 由于延迟队列不需要真的被消费，所以不需要路由键，我们用一个“#”来代替
+     */
+    public static final String TEST_DELAY_ROUTING_KEY = "#";
+
 }

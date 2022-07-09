@@ -67,11 +67,11 @@ public class RabbitMqConfig {
     }
 
     /**
-     * 绑定延迟队列和延迟交换机，使用一个错误的路由键，保证不会被消费
+     * 绑定延迟队列和延迟交换机，使用一个错误的路由键，这个常量是个“#”，保证不会被消费
      */
     @Bean
     public Binding testDelayBinding() {
-        return BindingBuilder.bind(testDelayQueue()).to(testDelayExchange()).with("#");
+        return BindingBuilder.bind(testDelayQueue()).to(testDelayExchange()).with(RabbitMqConstants.TEST_DELAY_ROUTING_KEY);
     }
 
     /**
