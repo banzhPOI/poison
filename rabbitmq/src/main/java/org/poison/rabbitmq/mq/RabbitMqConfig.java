@@ -66,6 +66,9 @@ public class RabbitMqConfig {
         return BindingBuilder.bind(testQueue()).to(testExchange()).with(RabbitMqConstants.TEST_ROUTING_KEY);
     }
 
+    /**
+     * 绑定延迟队列和延迟交换机，使用一个错误的路由键，保证不会被消费
+     */
     @Bean
     public Binding testDelayBinding() {
         return BindingBuilder.bind(testDelayQueue()).to(testDelayExchange()).with("#");
