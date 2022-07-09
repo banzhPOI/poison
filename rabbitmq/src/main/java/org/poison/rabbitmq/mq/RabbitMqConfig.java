@@ -18,6 +18,7 @@ public class RabbitMqConfig {
 
     /**
      * QUEUE
+     * 注册队列Bean
      */
 
     @Bean
@@ -27,6 +28,7 @@ public class RabbitMqConfig {
 
     /**
      * EXCHANGE
+     * 注册交换机Bean
      */
 
     @Bean
@@ -36,6 +38,7 @@ public class RabbitMqConfig {
 
     /**
      * BINDING
+     * 交换机的队列使用路由键绑定
      */
 
     @Bean
@@ -45,6 +48,7 @@ public class RabbitMqConfig {
 
     /**
      * CONTAINER
+     * Listener用的
      */
 
     @Resource
@@ -56,7 +60,6 @@ public class RabbitMqConfig {
     private final static int CONCURRENT_CONSUMERS = 30;
 
     private final static int MAX_CONCURRENT_CONSUMERS = 60;
-
 
     @Bean(name = "testContainer")
     SimpleRabbitListenerContainerFactory testContainer() {
@@ -76,6 +79,7 @@ public class RabbitMqConfig {
 
     /**
      * RABBIT_ADMIN
+     * 能自动注册队列、交换机、绑定关系的关键：RabbitAdmin
      */
     @Bean
     public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {

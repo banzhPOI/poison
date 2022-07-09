@@ -28,6 +28,7 @@ public class RabbitMqSender {
         String json = objectMapper.writeValueAsString(obj);
         log.info("RabbitMqSender sendMessage exchange :{} routingKey:{} message:{}", exchange, routingKey, json);
         try {
+            //我们经常遇到的warning“Could not convert incoming message with content-type [text/plain], 'json' keyword missing. rabbitmq”就是因为没有设置contentType
             MessageProperties messageProperties = new MessageProperties();
             messageProperties.setContentType("application/json");
             Message message = new Message(json.getBytes(), messageProperties);
