@@ -27,6 +27,17 @@ public class RabbitMqConfig {
     }
 
     /**
+     * 延迟队列
+     * 关键在于增加了一个参数"x-dead-letter-exchange"，意思是进入死信之后转入正常交换机“TEST_EXCHANGE”
+     */
+    @Bean
+    public Queue testDelayQueue() {
+        return QueueBuilder.durable(RabbitMqConstants.TEST_DELAY_QUEUE)
+                .withArgument("x-dead-letter-exchange", RabbitMqConstants.TEST_EXCHANGE)
+                .build();
+    }
+
+    /**
      * EXCHANGE
      * 注册交换机Bean
      */
@@ -37,6 +48,15 @@ public class RabbitMqConfig {
     }
 
     /**
+     * 延迟交换机
+     * 一定要用“TopicExchange”而非“DirectExchange”
+     */
+    @Bean
+    public TopicExchange testDelayExchange() {
+        return new TopicExchange(RabbitMqConstants.TEST_DELAY_EXCHANGE);
+    }
+
+    /**
      * BINDING
      * 交换机的队列使用路由键绑定
      */
@@ -44,6 +64,11 @@ public class RabbitMqConfig {
     @Bean
     public Binding testBinding() {
         return BindingBuilder.bind(testQueue()).to(testExchange()).with(RabbitMqConstants.TEST_ROUTING_KEY);
+    }
+
+    @Bean
+    public Binding testDelayBinding() {
+        return BindingBuilder.bind(testDelayQueue()).to(testDelayExchange()).with("#");
     }
 
     /**
@@ -84,9 +109,15 @@ public class RabbitMqConfig {
     @Bean
     public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
         RabbitAdmin rabbitAdmin = new RabbitAdmin(connectionFactory);
+        //QUEUE
         rabbitAdmin.declareQueue(testQueue());
+        rabbitAdmin.declareQueue(testDelayQueue());
+        //EXCHANGE
         rabbitAdmin.declareExchange(testExchange());
+        rabbitAdmin.declareExchange(testDelayExchange());
+        //BINDING
         rabbitAdmin.declareBinding(testBinding());
+        rabbitAdmin.declareBinding(testDelayBinding());
         return new RabbitAdmin(connectionFactory);
     }
 }

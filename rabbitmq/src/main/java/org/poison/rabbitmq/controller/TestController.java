@@ -22,7 +22,7 @@ public class TestController {
 
     @PostMapping(value = "")
     public String test(@RequestBody Body abc) {
-        rabbitMqSender.sendMessage(RabbitMqConstants.TEST_EXCHANGE, RabbitMqConstants.TEST_ROUTING_KEY, abc);
+        rabbitMqSender.sendDelayMessage(RabbitMqConstants.TEST_DELAY_EXCHANGE, RabbitMqConstants.TEST_ROUTING_KEY, abc, 5000L);
         return "helloWorld";
     }
 
