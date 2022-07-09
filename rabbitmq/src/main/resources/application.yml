@@ -1,0 +1,6 @@
+spring:
+
+  rabbitmq:
+    addresses: 192.168.133.200
+    username: admin
+    password: advance.ai2016
