@@ -3,7 +3,7 @@ package org.poison.document.template.core;
 /**
  * 基础单项状态
  */
-public enum TemplateDocumentItemStatus {
+public enum DocumentItemStatus {
 
     /**
      * 初始化创建

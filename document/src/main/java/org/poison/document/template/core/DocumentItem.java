@@ -6,7 +6,7 @@ import lombok.Data;
  * 基础单项类，包含基础单项信息
  */
 @Data
-public class TemplateDocumentItem {
+public class DocumentItem {
 
     Long id;
 
@@ -20,5 +20,5 @@ public class TemplateDocumentItem {
     /**
      * 单项状态
      */
-    TemplateDocumentItemStatus itemStatus;
+    DocumentItemStatus itemStatus;
 }

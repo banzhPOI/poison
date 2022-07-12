@@ -8,7 +8,7 @@ import java.util.List;
  * 基础单据类，包含基础单据信息
  */
 @Data
-public class TemplateDocument {
+public class Document {
 
     Long id;
 
@@ -22,10 +22,10 @@ public class TemplateDocument {
     /**
      * 单据状态
      */
-    TemplateDocumentStatus status;
+    DocumentStatus status;
 
     /**
      * 单项列表
      */
-    List<TemplateDocumentItem> itemList;
+    List<DocumentItem> itemList;
 }
