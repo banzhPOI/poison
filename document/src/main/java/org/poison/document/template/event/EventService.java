@@ -1,8 +1,8 @@
 package org.poison.document.template.event;
 
-import org.poison.document.template.core.DocumentItem;
+import org.poison.document.template.core.biz.DocumentItem;
 
-public interface DocumentItemEventService {
+public interface EventService {
 
     /**
      * 初始化

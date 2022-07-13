@@ -1,5 +1,6 @@
-package org.poison.document.template.core;
+package org.poison.document.template.core.biz;
 
+import org.poison.document.template.core.ctx.Status;
 import org.poison.statemachine.Condition;
 import lombok.Data;
 
@@ -21,7 +22,7 @@ public class DocumentItem {
     /**
      * 单项状态
      */
-    DocumentItemStatus itemStatus;
+    Status itemStatus;
 
     public static Condition<DocumentItem> checkCondition() {
 //        (ctx) -> {

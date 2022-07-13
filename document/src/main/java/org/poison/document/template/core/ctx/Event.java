@@ -1,6 +1,6 @@
-package org.poison.document.template.core;
+package org.poison.document.template.core.ctx;
 
-public enum DocumentItemEvent {
+public enum Event {
 
     /**
      * 编辑

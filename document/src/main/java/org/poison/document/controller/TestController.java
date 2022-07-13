@@ -1,7 +1,7 @@
 package org.poison.document.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.poison.document.template.event.DocumentItemEventService;
+import org.poison.document.template.event.EventService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 public class TestController {
 
     @Resource
-    private DocumentItemEventService documentItemOperatorService;
+    private EventService documentItemOperatorService;
 
     @PostMapping(value = "")
     public String test(@RequestBody Body abc) {

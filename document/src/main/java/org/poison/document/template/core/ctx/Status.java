@@ -1,9 +1,9 @@
-package org.poison.document.template.core;
+package org.poison.document.template.core.ctx;
 
 /**
  * 基础单项状态
  */
-public enum DocumentItemStatus {
+public enum Status {
 
     /**
      * 初始化创建

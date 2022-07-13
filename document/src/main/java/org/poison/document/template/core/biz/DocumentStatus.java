@@ -1,4 +1,4 @@
-package org.poison.document.template.core;
+package org.poison.document.template.core.biz;
 
 /**
  * 基础单据状态

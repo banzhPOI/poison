@@ -1,4 +1,4 @@
-package org.poison.document.template.core;
+package org.poison.document.template.core.biz;
 
 import lombok.Data;
 
