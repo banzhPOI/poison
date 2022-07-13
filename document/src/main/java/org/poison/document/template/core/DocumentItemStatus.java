@@ -23,5 +23,5 @@ public enum DocumentItemStatus {
     /**
      * 已作废
      */
-    INVALID
+    INVALID;
 }

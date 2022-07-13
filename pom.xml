@@ -17,6 +17,7 @@
         <module>starter</module>
         <module>document</module>
         <module>rabbitmq</module>
+        <module>statemachine</module>
     </modules>
 
 </project>

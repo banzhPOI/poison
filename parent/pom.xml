@@ -18,6 +18,7 @@
     <properties>
         <starter.version>0.0.1-SNAPSHOT</starter.version>
         <common.version>0.0.1-SNAPSHOT</common.version>
+        <statemachine.version>0.0.1-SNAPSHOT</statemachine.version>
     </properties>
 
     <dependencyManagement>
@@ -31,6 +32,11 @@
                 <groupId>org.poison</groupId>
                 <artifactId>common</artifactId>
                 <version>${common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.poison</groupId>
+                <artifactId>statemachine</artifactId>
+                <version>${statemachine.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

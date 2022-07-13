@@ -10,17 +10,13 @@
     </parent>
 
     <packaging>jar</packaging>
-    <artifactId>document</artifactId>
+    <artifactId>statemachine</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>org.poison</groupId>
             <artifactId>starter</artifactId>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.poison</groupId>
-            <artifactId>statemachine</artifactId>
         </dependency>
     </dependencies>
 
