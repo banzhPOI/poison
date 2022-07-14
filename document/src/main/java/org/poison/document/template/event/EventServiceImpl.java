@@ -1,5 +1,7 @@
 package org.poison.document.template.event;
 
+import org.poison.document.template.core.ctx.Context;
+import org.poison.document.template.core.ctx.OperateWithQuantity;
 import org.poison.statemachine.StateMachine;
 import org.poison.statemachine.StateMachineFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +18,10 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public DocumentItem init(String userId, Long id) {
-        StateMachine<Status, Event, DocumentItem> stateMachine = StateMachineFactory.get("DOCUMENT_ITEM_STATE_MACHINE");
-        Status status =stateMachine.fireEvent(Status.CREATE, Event.INIT,new DocumentItem() );
+        StateMachine<Status, Event, Object> stateMachine = StateMachineFactory.get("DOCUMENT_ITEM_STATE_MACHINE");
+        OperateWithQuantity quantity = new OperateWithQuantity();
+        quantity.setQuantity(1L);
+        Status status =stateMachine.fireEvent(Status.CREATE, Event.INIT,quantity );
         log.info(status.name());
 
 
@@ -31,9 +35,9 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public DocumentItem execute(String userId, Long id) {
-        StateMachine<Status, Event, DocumentItem> stateMachine = StateMachineFactory.get("DOCUMENT_ITEM_STATE_MACHINE");
+        StateMachine<Status, Event, Context> stateMachine = StateMachineFactory.get("DOCUMENT_ITEM_STATE_MACHINE");
 
-        stateMachine.fireEvent(Status.PENDING, Event.EXECUTE,new DocumentItem() );
+        stateMachine.fireEvent(Status.PENDING, Event.EXECUTE,new Context() );
 
         return null;
     }

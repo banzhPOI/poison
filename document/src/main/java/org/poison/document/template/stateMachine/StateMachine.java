@@ -22,7 +22,7 @@ public class StateMachine {
 
     @Bean
     public void document() {
-        StateMachineBuilder<Status, Event, Context> builder = StateMachineBuilderFactory.create();
+        StateMachineBuilder<Status, Event, Object> builder = StateMachineBuilderFactory.create();
         builder.internalTransition()
                 .within(Status.CREATE)
                 .on(Event.EDIT)
@@ -49,7 +49,7 @@ public class StateMachine {
         builder.build(MACHINE_ID);
     }
 
-    private Condition<Context> checkCondition() {
+    private Condition<Object> checkCondition() {
         return (ctx) -> true;
     }
 }

@@ -7,9 +7,9 @@ import org.poison.statemachine.Action;
 
 public interface BizActionService {
 
-    Action<Status, Event, Context> preHandle();
+    Action<Status, Event, Object> preHandle();
 
-    Action<Status, Event, Context> execute();
+    Action<Status, Event, Object> execute();
 
-    Action<Status, Event, Context> cancel();
+    Action<Status, Event, Object> cancel();
 }

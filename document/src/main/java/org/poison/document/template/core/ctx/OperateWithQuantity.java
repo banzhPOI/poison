@@ -3,8 +3,7 @@ package org.poison.document.template.core.ctx;
 import lombok.Data;
 
 @Data
-public class Context {
+public class OperateWithQuantity extends Operate {
 
-
-    Operate operate;
+    Long quantity;
 }

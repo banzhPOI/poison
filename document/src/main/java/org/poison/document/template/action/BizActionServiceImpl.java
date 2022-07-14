@@ -1,6 +1,7 @@
 package org.poison.document.template.action;
 
 import org.poison.document.template.core.ctx.Context;
+import org.poison.document.template.core.ctx.OperateWithQuantity;
 import org.poison.statemachine.Action;
 import lombok.extern.slf4j.Slf4j;
 import org.poison.document.template.core.ctx.Event;
@@ -12,9 +13,10 @@ import org.springframework.stereotype.Service;
 public class BizActionServiceImpl implements BizActionService {
 
     @Override
-    public Action<Status, Event, Context> preHandle() {
+    public Action<Status, Event, Object> preHandle() {
         return (from, to, event, ctx) -> {
-            log.info("from:" + from + " to:" + to + " on:" + event + " condition:" + ctx.getId());
+            OperateWithQuantity quantity= (OperateWithQuantity) ctx;
+            log.info("from:" + from + " to:" + to + " on:" + event + " condition:" + quantity.getQuantity());
             try {
                 //休眠5秒，当做处理业务代码
                 Thread.sleep(5000);
@@ -26,16 +28,16 @@ public class BizActionServiceImpl implements BizActionService {
     }
 
     @Override
-    public Action<Status, Event, Context> execute() {
+    public Action<Status, Event, Object> execute() {
         return (from, to, event, ctx) -> {
-            log.info("from:" + from + " to:" + to + " on:" + event + " condition:" + ctx.getId());
+            log.info("from:" + from + " to:" + to + " on:" + event + " condition:" );
         };
     }
 
     @Override
-    public Action<Status, Event, Context> cancel() {
+    public Action<Status, Event, Object> cancel() {
         return (from, to, event, ctx) -> {
-            log.info("from:" + from + " to:" + to + " on:" + event + " condition:" + ctx.getId());
+            log.info("from:" + from + " to:" + to + " on:" + event + " condition:");
         };
     }
 }
