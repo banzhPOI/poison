@@ -8,7 +8,7 @@ import java.util.List;
  * 基础单据类，包含基础单据信息
  */
 @Data
-public abstract class BaseDocument<S, I> {
+public abstract class Base<S, I> {
 
     Long id;
 

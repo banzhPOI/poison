@@ -6,7 +6,7 @@ import lombok.Data;
  * 基础单项类，包含基础单项信息
  */
 @Data
-public abstract class BaseDocumentItem<S> {
+public abstract class BaseItem<S> {
 
     Long id;
 

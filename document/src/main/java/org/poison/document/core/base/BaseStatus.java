@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * 基础单据状态
  */
-public interface BaseDocumentStatus<S, SI> {
+public interface BaseStatus<S, SI> {
 
     /**
      * 单据状态计算器

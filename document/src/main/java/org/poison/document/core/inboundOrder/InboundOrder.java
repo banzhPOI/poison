@@ -1,20 +1,12 @@
-package org.poison.document.inboundOrder.core;
+package org.poison.document.core.inboundOrder;
 
 import lombok.Data;
+import org.poison.document.core.base.Base;
 
 import java.util.List;
 
 @Data
-public class InboundOrder {
-
-    Long id;
-
-    /**
-     * 单号
-     */
-    String no;
-
-    String userId;
+public class InboundOrder extends Base<InboundOrderStatus, InboundOrderItem> {
 
     /**
      * 单据状态

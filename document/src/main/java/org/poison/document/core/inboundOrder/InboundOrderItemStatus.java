@@ -1,9 +1,11 @@
-package org.poison.document.inboundOrder.core;
+package org.poison.document.core.inboundOrder;
+
+import org.poison.document.core.base.BaseItemStatus;
 
 /**
  * 入库单单项状态
  */
-public enum InboundOrderItemStatus {
+public enum InboundOrderItemStatus implements BaseItemStatus {
 
     /**
      * 初始化创建
