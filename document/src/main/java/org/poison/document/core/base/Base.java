@@ -1,4 +1,4 @@
-package org.poison.document.template.core.biz;
+package org.poison.document.core.base;
 
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import java.util.List;
  * 基础单据类，包含基础单据信息
  */
 @Data
-public class Document {
+public abstract class BaseDocument<S, I> {
 
     Long id;
 
@@ -22,10 +22,10 @@ public class Document {
     /**
      * 单据状态
      */
-    DocumentStatus status;
+    S status;
 
     /**
      * 单项列表
      */
-    List<DocumentItem> itemList;
+    List<I> itemList;
 }
