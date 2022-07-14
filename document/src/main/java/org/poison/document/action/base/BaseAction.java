@@ -1,10 +1,12 @@
 package org.poison.document.action.base;
 
-public interface BaseAction<O> {
+import org.poison.statemachine.Action;
 
-    void init(O operate);
+public interface BaseAction<S, E> {
 
-    void execute(O operate);
+    Action<S, E> init();
 
-    void cancel(O operate);
+    Action<S, E> execute();
+
+    Action<S, E> cancel();
 }
