@@ -1,10 +1,12 @@
-package org.poison.document.core.inboundOrder;
+package org.poison.document.action.inboundOrder;
 
-import org.poison.document.core.base.BaseOperate;
+import lombok.Data;
+import org.poison.document.action.base.BaseOperate;
 
 import java.math.BigDecimal;
 
-public class InboundOperate extends BaseOperate {
+@Data
+public class InboundOrderItemOperate extends BaseOperate {
 
     /**
      * 仓库商品id

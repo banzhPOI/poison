@@ -3,7 +3,7 @@ package org.poison.document.core.base;
 import lombok.Data;
 
 @Data
-public class Operator {
+public abstract class Operator {
 
     String operatorId;
 

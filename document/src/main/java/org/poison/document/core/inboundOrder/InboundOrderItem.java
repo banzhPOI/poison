@@ -10,4 +10,9 @@ public class InboundOrderItem extends BaseItem<InboundOrderItemStatus> {
      * 单项状态
      */
     InboundOrderItemStatus itemStatus;
+
+    /**
+     * 货位商品
+     */
+    String shelfInventoryId;
 }

@@ -1,15 +1,21 @@
 package org.poison.document.action.inboundOrder;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.poison.document.core.base.Operator;
 import org.poison.document.core.inboundOrder.InboundEvent;
 import org.poison.document.core.inboundOrder.InboundOrderItemStatus;
 import org.poison.statemachine.Action;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 @Slf4j
 @Service
 public class InboundActionImpl implements InboundAction {
+
+    @Resource
+    private ObjectMapper objectMapper;
 
     @Override
     public Action<InboundOrderItemStatus, InboundEvent> init() {
@@ -19,8 +25,13 @@ public class InboundActionImpl implements InboundAction {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            Operator o = (Operator) ctx;
-            log.info("状态机action执行，从 {} 到 {}操作人：{} ,{}", from, to, o.getOperatorId(), o.getOperatorName());
+            InboundOrderItemOperate o = (InboundOrderItemOperate) ctx;
+            try {
+                log.info("对象:{}", objectMapper.writeValueAsString(o));
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+            log.info("状态机action执行，从 {} 到 {}操作人：{} ,{}", from, to, o.getOperator().getOperatorId(), o.getOperator().getOperatorName());
         });
     }
 

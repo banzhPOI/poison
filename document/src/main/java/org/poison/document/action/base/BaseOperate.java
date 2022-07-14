@@ -1,5 +1,9 @@
-package org.poison.document.core.base;
+package org.poison.document.action.base;
 
+import lombok.Data;
+import org.poison.document.core.base.Operator;
+
+@Data
 public abstract class BaseOperate {
 
     String userId;
