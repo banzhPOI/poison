@@ -23,7 +23,7 @@ public class RabbitMqSender {
     /**
      * 发送广播消息
      */
-    public void sendMessage(String exchange, String routingKey, Object obj) {
+    public <T> void sendMessage(String exchange, String routingKey, T obj) {
         Message message = convertMessage(exchange, routingKey, obj);
         try {
             amqpTemplate.convertAndSend(exchange, routingKey, message);
@@ -40,7 +40,7 @@ public class RabbitMqSender {
      * @param obj
      * @param expireTime 过期时间(毫秒)
      */
-    public void sendDelayMessage(String exchange, String routingKey, Object obj, Long expireTime) {
+    public <T> void sendDelayMessage(String exchange, String routingKey, T obj, Long expireTime) {
         Message message = convertMessage(exchange, routingKey, obj);
         try {
             amqpTemplate.convertAndSend(exchange, routingKey, message, postMsg -> {
@@ -53,7 +53,7 @@ public class RabbitMqSender {
     }
 
     @SneakyThrows
-    private Message convertMessage(String exchange, String routingKey, Object obj) {
+    private <T> Message convertMessage(String exchange, String routingKey, T obj) {
         String json = objectMapper.writeValueAsString(obj);
         log.info("RabbitMqSender sendMessage exchange :{} routingKey:{} message:{}", exchange, routingKey, json);
         //我们经常遇到的warning“Could not convert incoming message with content-type [text/plain], 'json' keyword missing. rabbitmq”就是因为没有设置contentType
