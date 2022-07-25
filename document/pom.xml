@@ -20,7 +20,8 @@
         </dependency>
         <dependency>
             <groupId>org.poison</groupId>
-            <artifactId>statemachine</artifactId>
+            <artifactId>workflow</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

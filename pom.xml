@@ -20,6 +20,8 @@
         <module>document</module>
         <module>rabbitmq</module>
         <module>statemachine</module>
+        <module>websocket</module>
+        <module>workflow</module>
     </modules>
 
 </project>
