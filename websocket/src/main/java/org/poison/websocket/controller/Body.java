@@ -1,4 +1,4 @@
-package org.poison.websocket;
+package org.poison.websocket.controller;
 
 import lombok.Data;
 

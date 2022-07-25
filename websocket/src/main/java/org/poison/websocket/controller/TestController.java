@@ -1,4 +1,4 @@
-package org.poison.websocket;
+package org.poison.websocket.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("test")
 public class TestController {
 
+
     @PostMapping(value = "")
     public String test(@RequestBody Body abc) {
         return "helloWorld";
     }
+
 
 }
