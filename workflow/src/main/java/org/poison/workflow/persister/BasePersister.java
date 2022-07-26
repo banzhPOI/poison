@@ -1,4 +1,4 @@
-package org.poison.workflow;
+package org.poison.workflow.persister;
 
 import java.util.List;
 
