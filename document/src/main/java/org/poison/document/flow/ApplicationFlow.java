@@ -1,11 +1,10 @@
-package org.poison.document.transition;
+package org.poison.document.flow;
 
 import org.poison.document.action.ApplicationAction1;
 import org.poison.workflow.action.Action;
 import org.poison.workflow.flow.Flow;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Component

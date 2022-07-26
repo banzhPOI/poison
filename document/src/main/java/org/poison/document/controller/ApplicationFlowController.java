@@ -2,7 +2,7 @@ package org.poison.document.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.poison.document.action.ApplicationAction1;
-import org.poison.document.transition.ApplicationFlow;
+import org.poison.document.flow.ApplicationFlow;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
