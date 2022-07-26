@@ -18,11 +18,6 @@
 			<artifactId>starter</artifactId>
 			<optional>true</optional>
 		</dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>5.3.21</version>
-        </dependency>
     </dependencies>
 
 </project>
