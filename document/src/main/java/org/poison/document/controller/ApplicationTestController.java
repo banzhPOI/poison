@@ -1,9 +1,7 @@
 package org.poison.document.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.poison.document.action.ApplicationAction1;
 import org.poison.document.transition.ApplicationFlow;
-import org.poison.workflow.action.Action;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +17,19 @@ public class ApplicationTestController {
     private ApplicationFlow flow;
 
     @PostMapping(value = "")
-    public void build() {
-        flow.fireEvent(1L, 1L);
+    public void test() {
+
+        for (int i = 0; i < 10; i++) {
+            Thread thread = new Thread(() -> {
+                String result = (String) flow.fireEventWithResult(1L, 1L, "paramAbc");
+            });
+            thread.start();
+        }
+        for (int i = 0; i < 10; i++) {
+            Thread thread = new Thread(() -> {
+                String result = (String) flow.fireEventWithResult(1L, 2L, "paramAbc2");
+            });
+            thread.start();
+        }
     }
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class ApplicationAction1 extends DefaultAction<Object, Object, ApplicationAction1> {
+public class ApplicationAction1 extends DefaultAction<String, String, ApplicationAction1> {
 
     @Override
     public void doAction() {
@@ -16,5 +16,17 @@ public class ApplicationAction1 extends DefaultAction<Object, Object, Applicatio
             throw new RuntimeException(e);
         }
         log.info("do action1");
+    }
+
+    @Override
+    public String doActionWithResult(String param) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        String result = "result" + param;
+        log.info("do action1 with param: {} and result: {}", param, result);
+        return result;
     }
 }

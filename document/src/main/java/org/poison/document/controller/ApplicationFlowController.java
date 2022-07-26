@@ -1,6 +1,7 @@
 package org.poison.document.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.poison.document.action.ApplicationAction1;
 import org.poison.document.transition.ApplicationFlow;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +22,8 @@ public class ApplicationFlowController {
         Long sourceStatusId = 1L;
         Long targetStatusId = 1L;
         Long eventId = 1L;
-        Long actionId = 1L;
-        ApplicationFlow transition = applicationFlow.build(sourceStatusId, targetStatusId, eventId, actionId);
+        String actionClassName = ApplicationAction1.class.getName();
+        ApplicationFlow transition = applicationFlow.build(sourceStatusId, targetStatusId, eventId, actionClassName);
         applicationFlow.add(transition);
     }
 }

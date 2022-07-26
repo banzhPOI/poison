@@ -1,10 +1,10 @@
 package org.poison.workflow.flow;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.poison.workflow.action.Action;
-import org.poison.workflow.event.Event;
 import org.poison.workflow.persister.BasePersister;
-import org.poison.workflow.status.Status;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -13,11 +13,12 @@ import java.util.List;
  * 用以构建过程
  */
 @Data
+@Slf4j
+@Component
 public abstract class Flow<P, R, A, T extends Flow<P, R, A, T>> implements BasePersister<T> {
 
-
     @Resource
-    private Action<P, R> baseAction;
+    protected Action<P, R> baseAction;
 
     /**
      * 来源状态id
@@ -72,24 +73,30 @@ public abstract class Flow<P, R, A, T extends Flow<P, R, A, T>> implements BaseP
     /**
      * 获取动作
      */
-    public Action<P,R> getAction(String actionName) {
+    public Action<P, R> getAction(String actionName) {
         return baseAction.getAction(actionName);
     }
 
     /**
      * 触发事件
+     * 返回target状态id
      */
-    public void fireEvent(Long sourceStatusId, Long eventId) {
+    public Long fireEvent(Long sourceStatusId, Long eventId) {
         Flow<P, R, A, T> flow = find(sourceStatusId, eventId);
-        flow.getAction(flow.getActionClassName()).doAction();
+        log.info("from: {} to: {} on:{}",flow.getSourceStatusId(),flow.getTargetStatusId(),flow.getEventId());
+        getAction(flow.getActionClassName()).doAction();
+        return flow.getTargetStatusId();
     }
 
     /**
      * 触发事件
+     * 返回target状态id
      */
-    public void fireEventWithParam(Long sourceStatusId, Long eventId, P param) {
+    public Long fireEventWithParam(Long sourceStatusId, Long eventId, P param) {
         Flow<P, R, A, T> flow = find(sourceStatusId, eventId);
-        flow.getAction(flow.getActionClassName()).doActionWithParam(param);
+        log.info("from: {} to: {} on:{}",flow.getSourceStatusId(),flow.getTargetStatusId(),flow.getEventId());
+        getAction(flow.getActionClassName()).doActionWithParam(param);
+        return flow.getTargetStatusId();
     }
 
     /**
@@ -97,7 +104,8 @@ public abstract class Flow<P, R, A, T extends Flow<P, R, A, T>> implements BaseP
      */
     public R fireEventWithResult(Long sourceStatusId, Long eventId, P param) {
         Flow<P, R, A, T> flow = find(sourceStatusId, eventId);
-        return flow.getAction(flow.getActionClassName()).doActionWithResult(param);
+        log.info("from: {} to: {} on:{}",flow.getSourceStatusId(),flow.getTargetStatusId(),flow.getEventId());
+        return getAction(flow.getActionClassName()).doActionWithResult(param);
     }
 
     public T build(Long sourceStatusId, Long targetStatusId, Long eventId, String actionClassName, Class<T> clazz) {

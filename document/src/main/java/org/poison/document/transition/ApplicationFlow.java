@@ -1,18 +1,21 @@
 package org.poison.document.transition;
 
+import org.poison.document.action.ApplicationAction1;
 import org.poison.workflow.action.Action;
 import org.poison.workflow.flow.Flow;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Component
-public class ApplicationFlow extends Flow<Object,Object, Action,ApplicationFlow> {
+public class ApplicationFlow extends Flow<Object, Object, Action, ApplicationFlow> {
 
 
 
     /**
      * 构建
+     *
      * @param sourceStatusId
      * @param targetStatusId
      * @param eventId
@@ -33,7 +36,21 @@ public class ApplicationFlow extends Flow<Object,Object, Action,ApplicationFlow>
      */
     @Override
     public ApplicationFlow find(Long sourceStatusId, Long eventId) {
-        return null;
+        /**
+         * for test
+         */
+        ApplicationFlow flow = new ApplicationFlow();
+        if (sourceStatusId==1L&&eventId==1L){
+            flow.setEventId(1L);
+            flow.setSourceStatusId(1L);
+            flow.setTargetStatusId(2L);
+        } else if (sourceStatusId==1L&&eventId==2L) {
+            flow.setEventId(2L);
+            flow.setSourceStatusId(1L);
+            flow.setTargetStatusId(3L);
+        }
+        flow.setActionClassName(ApplicationAction1.class.getName());
+        return flow;
     }
 
     /**
@@ -46,8 +63,6 @@ public class ApplicationFlow extends Flow<Object,Object, Action,ApplicationFlow>
     public List<ApplicationFlow> find(Long sourceStatusId) {
         return null;
     }
-
-
 
 
     /**
@@ -98,7 +113,6 @@ public class ApplicationFlow extends Flow<Object,Object, Action,ApplicationFlow>
     public ApplicationFlow findById(Long id) {
         return null;
     }
-
 
 
 }

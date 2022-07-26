@@ -1,5 +1,8 @@
 package org.poison.workflow.action;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public abstract class DefaultAction<P, R, A extends DefaultAction<P, R, A>> implements Action<P, R> {
 
     @Override
