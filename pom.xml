@@ -22,6 +22,7 @@
         <module>statemachine</module>
         <module>websocket</module>
         <module>workflow</module>
+        <module>merge</module>
     </modules>
 
 </project>
