@@ -10,7 +10,7 @@
     </parent>
 
     <packaging>jar</packaging>
-    <artifactId>rabbitmq</artifactId>
+    <artifactId>websocket</artifactId>
 
     <dependencies>
         <dependency>
