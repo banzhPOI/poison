@@ -1,9 +1,10 @@
-package org.poison.merge.controller;
+package org.poison.task.controller;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.poison.merge.distinct.Distinct;
-import org.poison.merge.task.Task;
+import org.poison.merge.BaseTask;
+import org.poison.merge.Merge;
+import org.poison.task.task.Task;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,16 +19,16 @@ import javax.annotation.Resource;
 public class TestController {
 
     @Resource
-    private Distinct distinct;
+    private Merge merge;
 
     @PostMapping(value = "")
-    public List<Task> test() {
-        Task t = new Task();
+    public List<BaseTask> test() {
+        BaseTask t = new Task();
         t.setId(1L);
-        t.setName("abc");
+        t.setKey("abc");
         for (int i = 0; i < 150; i++) {
-            distinct.add(t);
+            merge.add(t);
         }
-        return distinct.getAndRemove();
+        return merge.getAndRemove();
     }
 }

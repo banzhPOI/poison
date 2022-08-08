@@ -23,6 +23,7 @@
         <module>websocket</module>
         <module>workflow</module>
         <module>merge</module>
+        <module>baseTask</module>
     </modules>
 
 </project>

@@ -1,4 +1,4 @@
-package org.poison.merge.config;
+package org.poison.task.config;
 
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;

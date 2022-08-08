@@ -19,6 +19,10 @@
         <starter.version>0.0.1-SNAPSHOT</starter.version>
         <common.version>0.0.1-SNAPSHOT</common.version>
         <statemachine.version>0.0.1-SNAPSHOT</statemachine.version>
+        <workflow.version>0.0.1-SNAPSHOT</workflow.version>
+        <merge.version>0.0.1-SNAPSHOT</merge.version>
+
+        <redisson.version>3.17.5</redisson.version>
     </properties>
 
     <dependencyManagement>
@@ -37,6 +41,21 @@
                 <groupId>org.poison</groupId>
                 <artifactId>statemachine</artifactId>
                 <version>${statemachine.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.poison</groupId>
+                <artifactId>workflow</artifactId>
+                <version>${workflow.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.poison</groupId>
+                <artifactId>merge</artifactId>
+                <version>${merge.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
