@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Task extends ShardingBaseTask {
 
 
-    Long id;
+    private Long id;
 
-    String shardingKey;
+    private String shardingKey;
 }
