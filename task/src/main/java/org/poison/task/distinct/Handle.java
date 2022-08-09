@@ -39,6 +39,9 @@ public class Handle extends Merge<Task> {
     }
 
 
+    /**
+     * todo 失败的消息重写加入队列
+     */
     @Scheduled(fixedDelay = INTERVAL_TIME)
     @SneakyThrows
     @Override

@@ -10,10 +10,6 @@ public abstract class BaseTask implements Serializable {
 
     Long id;
 
-    /**
-     * key一样视为重复
-     */
-    String key;
 
     /**
      * 重写equals方法

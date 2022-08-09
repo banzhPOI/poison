@@ -99,7 +99,7 @@ public abstract class Merge<T extends BaseTask> {
         } else {
             needDeleteList = taskRList.subList(0, getWindowNum());
         }
-        list = cloneUtils.cloneList(needDeleteList);
+        list = needDeleteList;
         taskRList.removeAll(needDeleteList);
         return list.stream().distinct().collect(Collectors.toList());
     }
