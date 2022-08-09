@@ -17,8 +17,8 @@ public class Task extends BaseTask {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BaseTask that = (BaseTask) o;
-        return Objects.equals(key, that.getKey());
+        Task that = (Task) o;
+        return Objects.equals(key, that.key);
     }
 
     /**

@@ -3,7 +3,6 @@ package org.poison.merge;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import org.poison.starter.utils.CloneUtils;
 import org.redisson.api.RList;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
@@ -27,9 +26,6 @@ public abstract class Merge<T extends BaseTask> {
 
     @Resource
     private RedissonClient redissonClient;
-
-    @Resource
-    private CloneUtils<T> cloneUtils;
 
     /**
      * 任务名
@@ -87,7 +83,6 @@ public abstract class Merge<T extends BaseTask> {
     /**
      * 获取并清理任务
      */
-    @SneakyThrows
     private List<T> getAndRemove() {
         List<T> list = new ArrayList<>();
         List<T> needDeleteList;
