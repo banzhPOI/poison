@@ -22,7 +22,7 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @Component
-public abstract class Merge<T extends BaseTask> {
+public abstract class Merge<T> {
 
     @Resource
     private RedissonClient redissonClient;

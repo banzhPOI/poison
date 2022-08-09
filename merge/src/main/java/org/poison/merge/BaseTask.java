@@ -11,15 +11,4 @@ public abstract class BaseTask implements Serializable {
     Long id;
 
 
-    /**
-     * 重写equals方法
-     */
-    @Override
-    public abstract boolean equals(Object o);
-
-    /**
-     * 重写hashCode方法
-     */
-    @Override
-    public abstract int hashCode();
 }
