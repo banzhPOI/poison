@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.poison.task.distinct.Handle;
 import org.poison.task.distinct.Handle2;
+import org.poison.task.distinct.ShardingHandler;
 import org.poison.task.task.Task;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +23,7 @@ public class TestController {
     private ObjectMapper objectMapper;
 
     @Resource
-    private Handle handle;
+    private ShardingHandler handler;
 
     @Resource
     private Handle2 handle2;
@@ -35,13 +35,28 @@ public class TestController {
             Thread thread = new Thread(() -> {
                 Task t = new Task();
                 t.setId((long) finalI);
-                t.setKey("abc" + finalI);
+                t.setShardingKey("abc");
                 try {
                     log.info("add task: {}", objectMapper.writeValueAsString(t));
                 } catch (JsonProcessingException e) {
                     throw new RuntimeException(e);
                 }
-                handle.add(t);
+                handler.add(t);
+            });
+            thread.start();
+        }
+        for (int i = 0; i < 150; i++) {
+            int finalI = i;
+            Thread thread = new Thread(() -> {
+                Task t = new Task();
+                t.setId((long) finalI);
+                t.setShardingKey("abc2");
+                try {
+                    log.info("add task: {}", objectMapper.writeValueAsString(t));
+                } catch (JsonProcessingException e) {
+                    throw new RuntimeException(e);
+                }
+                handler.add(t);
             });
             thread.start();
         }
@@ -54,7 +69,7 @@ public class TestController {
             Thread thread = new Thread(() -> {
                 Task t = new Task();
                 t.setId((long) finalI);
-                t.setKey("abc2" + finalI);
+                t.setShardingKey("abc2" + finalI);
                 try {
                     log.info("add task: {}", objectMapper.writeValueAsString(t));
                 } catch (JsonProcessingException e) {
@@ -68,6 +83,6 @@ public class TestController {
 
     @PostMapping(value = "get")
     public void get() {
-        handle.handleTask();
+        handler.handleTask();
     }
 }
