@@ -24,6 +24,7 @@
         <module>workflow</module>
         <module>merge</module>
         <module>task</module>
+        <module>redisson</module>
     </modules>
 
 </project>
