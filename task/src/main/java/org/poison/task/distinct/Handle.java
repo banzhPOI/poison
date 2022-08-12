@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import org.poison.merge.Merge;
+import org.poison.merge.Merger;
 import org.poison.task.task.Task;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 
 @Slf4j
 @Component
-public class Handle extends Merge<Task> {
+public class Handle extends Merger<Task> {
 
     @Resource
     private ObjectMapper objectMapper;

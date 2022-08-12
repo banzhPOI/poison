@@ -7,6 +7,5 @@ import java.io.Serializable;
 @Data
 public abstract class ShardingBaseTask implements Serializable {
 
-    private String shardingKey;
-
+    public abstract String getShardingKey();
 }

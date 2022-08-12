@@ -7,7 +7,5 @@ import java.io.Serializable;
 @Data
 public abstract class BaseTask implements Serializable {
 
-    private Long id;
-
 
 }
