@@ -46,19 +46,23 @@ public class TestController {
         return third == null ? 0 : third;
     }
 
+    public void putThird(String secondName, String thirdName,Long third){
+        RMapCache<String, Long> second = getSecond(secondName);
+        second.put(thirdName,third,60,TimeUnit.SECONDS);
+    }
+
     @PostMapping(value = "put")
     public void put() {
         String secondName = "SECOND";
-        RMapCache<String, Long> second = getSecond(secondName);
-        second.put("THIRD", 1L, 10, TimeUnit.SECONDS);
-        rMapCacheRMapCache.put(secondName, second);
+        String thirdName = "THIRD";
+        putThird(secondName,thirdName,1L);
     }
 
 
     @PostMapping(value = "get")
     public Long get() {
         String secondName = "SECOND";
-        String thirdName = "SECOND";
+        String thirdName = "THIRD";
         return getThird(secondName, thirdName);
     }
 }
