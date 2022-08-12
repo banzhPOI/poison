@@ -1,5 +1,5 @@
 spring:
   redis:
-    host: 192.168.133.200
+    host: 10.255.98.41
     port: 6379
     password: advance.ai2016

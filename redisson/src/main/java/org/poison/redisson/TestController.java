@@ -4,7 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.redisson.api.RAtomicLong;
 import org.redisson.api.RMapCache;
+import org.redisson.api.RSet;
+import org.redisson.api.RSetCache;
 import org.redisson.api.RedissonClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,48 +24,48 @@ import javax.annotation.Resource;
 public class TestController {
 
     @Resource
-    private ObjectMapper objectMapper;
-    @Resource
     private RedissonClient redisson;
 
-    private RMapCache<String, RMapCache<String, Long>> rMapCacheRMapCache;
+    private RMapCache<String, RSetCache<String>> rMapCacheRMapCache;
 
     @PostConstruct
     public void init() {
-        rMapCacheRMapCache = redisson.getMapCache("FIRST");
+        rMapCacheRMapCache = redisson.getMapCache("SHOP");
     }
 
-    public RMapCache<String, Long> getSecond(String secondName) {
-        RMapCache<String, Long> second = rMapCacheRMapCache.get(secondName);
-        if (second == null) {
-            second = redisson.getMapCache(secondName);
+    public RSetCache<String> getShop(String shopName) {
+        RSetCache<String> shop = rMapCacheRMapCache.get(shopName);
+        if (shop == null) {
+            shop = redisson.getSetCache(shopName);
         }
-        return second;
+        return shop;
     }
 
-    public Long getThird(String secondName, String thirdName) {
-        RMapCache<String, Long> second = getSecond(secondName);
-        Long third = second.get(thirdName);
-        return third == null ? 0 : third;
+    public Long getSessionNum(String shopName, String sessionName) {
+        RAtomicLong num = redisson.getAtomicLong(sessionName + "_LONG");
+        return num == null ? 0 : num.get();
     }
 
-    public void putThird(String secondName, String thirdName,Long third){
-        RMapCache<String, Long> second = getSecond(secondName);
-        second.put(thirdName,third,60,TimeUnit.SECONDS);
+
+    public void putSessionNum(String shopName, String sessionName, Long sessionNum) {
+        RMapCache<String, RAtomicLong> shop = getShop(shopName);
+        RAtomicLong atomicLong = redisson.getAtomicLong(sessionName + "_LONG");
+        atomicLong.set(sessionNum);
+        shop.put(sessionName, atomicLong, 60, TimeUnit.SECONDS);
     }
 
     @PostMapping(value = "put")
     public void put() {
-        String secondName = "SECOND";
-        String thirdName = "THIRD";
-        putThird(secondName,thirdName,1L);
+        String shopName = "SECOND";
+        String sessionName = "THIRD";
+        putSessionNum(shopName, sessionName, 1L);
     }
 
 
     @PostMapping(value = "get")
     public Long get() {
-        String secondName = "SECOND";
-        String thirdName = "THIRD";
-        return getThird(secondName, thirdName);
+        String shopName = "SECOND";
+        String sessionName = "THIRD";
+        return getSessionNum(shopName, sessionName);
     }
 }
