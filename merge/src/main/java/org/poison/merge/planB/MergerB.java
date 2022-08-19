@@ -2,6 +2,7 @@ package org.poison.merge.planB;
 
 import org.poison.merge.Merger;
 import org.redisson.api.RList;
+import org.redisson.api.RQueue;
 import org.redisson.api.RSet;
 import org.redisson.api.RedissonClient;
 import org.springframework.util.CollectionUtils;
@@ -59,8 +60,10 @@ public abstract class MergerB<T> implements Merger<T> {
         }
         if (taskList.size() <= getWindowNum()) {
             list = taskList;
+            taskList.clear();
         } else {
             list = taskList.subList(0, getWindowNum());
+            taskList.p(0,getWindowNum());
         }
         //只取set中有的
         for (T t : list) {

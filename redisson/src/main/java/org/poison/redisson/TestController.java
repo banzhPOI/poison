@@ -2,13 +2,17 @@ package org.poison.redisson;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.redisson.api.RMapCache;
-import org.redisson.api.RSetCache;
+import org.redisson.api.RDeque;
+import org.redisson.api.RList;
 import org.redisson.api.RedissonClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 @Slf4j
@@ -19,12 +23,77 @@ public class TestController {
     @Resource
     private RedissonClient redisson;
 
-    private RMapCache<String, RSetCache<String>> rMapCacheRMapCache;
+    RDeque<String> queue;
+    RList<String> list;
+
+    @PostConstruct
+    public void init() {
+        queue = redisson.getDeque("anyDeque1");
+        list = redisson.getList("any");
+
+    }
 
 
     @PostMapping(value = "put")
     public void put() {
+        queue.add("abc");
+        queue.add("abc");
+        queue.add("bcd");
+        queue.add("cde");
+        queue.add("abc");
+        queue.add("abc");
+        queue.add("bcd");
+        queue.add("cde");
+        queue.add("abc");
+        queue.add("abc");
+        queue.add("bcd");
+        queue.add("cde");
+        queue.add("abc");
+        queue.add("abc");
+        queue.add("bcd");
+        queue.add("cde");
+        for (int i=0;i<10;i++){
+            log.info("size: "+queue.size());
+            List<String> strings = queue.poll(2);
+//            String str = queue.poll();
 
+//           queue.removeAll("abc");
+            queue.remove("abc");
+
+            strings.forEach(it->{
+                log.info(it);
+
+            });
+        }
     }
 
+
+    @PostMapping(value = "put2")
+    public void put2() {
+        list.add("abc");
+        list.add("abc");
+        list.add("bcd");
+        list.add("cde");
+        list.add("abc");
+        list.add("abc");
+        list.add("bcd");
+        list.add("cde");
+        list.add("abc");
+        list.add("abc");
+        list.add("bcd");
+        list.add("cde");
+        list.add("abc");
+        list.add("abc");
+        list.add("bcd");
+        list.add("cde");
+        for (int i=0;i<10;i++){
+            log.info("size: "+list.size());
+            List<String> strings = new ArrayList<>();
+//            strings.add("abc");
+//            list.removeAll(strings);
+            list.remove("abc");
+            log.info("size2: "+list.size());
+
+        }
+    }
 }
