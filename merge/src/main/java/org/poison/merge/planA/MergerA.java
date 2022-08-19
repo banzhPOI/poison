@@ -1,8 +1,8 @@
-package org.poison.merge;
+package org.poison.merge.planA;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.poison.starter.utils.ShardingUtils;
+import org.poison.merge.Merger;
 import org.redisson.api.RList;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
@@ -10,9 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
@@ -24,9 +22,7 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @Component
-public abstract class ShardingMerger<T extends ShardingBaseTask> {
-
-    private static final int DEFAULT_SHADING_NUM = 8;
+public abstract class MergerA<T> implements Merger<T> {
 
     @Resource
     private RedissonClient redissonClient;
@@ -37,46 +33,9 @@ public abstract class ShardingMerger<T extends ShardingBaseTask> {
     protected abstract String getTaskName();
 
     /**
-     * 每次取任务的窗口数量，分片后就是每个分片都取这么多
+     * 每次取任务的窗口数量
      */
     protected abstract int getWindowNum();
-
-    /**
-     * 获取分片数量
-     */
-    protected int getShadingNum() {
-        return DEFAULT_SHADING_NUM;
-    }
-
-
-    private final Map<Integer, RList<T>> shardingTaskListMap = new HashMap<>();
-
-
-    private RList<T> getRList(String shardingKey) {
-        return shardingTaskListMap.get(ShardingUtils.getShardingNum(shardingKey, getShadingNum()));
-    }
-
-    /**
-     * 初始化的时候要初始化所有分片，并且放到map里
-     */
-    @PostConstruct
-    private void postConstruct() {
-        List<String> shardingNameList = getShardingTaskNameList();
-        for (int i = 0; i < shardingNameList.size(); i++) {
-            shardingTaskListMap.put(i, redissonClient.getList(shardingNameList.get(i)));
-        }
-    }
-
-    /**
-     * 分片后的队列列表
-     */
-    private List<String> getShardingTaskNameList() {
-        List<String> shardingList = new ArrayList<>();
-        for (int i = 0; i < getShadingNum(); i++) {
-            shardingList.add(getTaskName() + "_" + i);
-        }
-        return shardingList;
-    }
 
     /**
      * 取任务线程池数量
@@ -84,11 +43,17 @@ public abstract class ShardingMerger<T extends ShardingBaseTask> {
      */
     protected abstract void handleTask();
 
+    private RList<T> taskRList;
+
+    @PostConstruct
+    private void postConstruct() {
+        taskRList = redissonClient.getList(getTaskName());
+    }
+
     /**
      * 插入任务
      */
     public void add(T t) {
-        RList<T> taskRList = getRList(t.getShardingKey());
         taskRList.add(t);
     }
 
@@ -115,19 +80,10 @@ public abstract class ShardingMerger<T extends ShardingBaseTask> {
         return taskList;
     }
 
-    private List<T> getAndRemove() {
-        List<T> list = new ArrayList<>();
-        shardingTaskListMap.forEach((k, v) -> {
-            list.addAll(getAndRemove(v));
-        });
-        return list;
-    }
-
     /**
      * 获取并清理任务
      */
-    private List<T> getAndRemove(RList<T> taskRList) {
-
+    private List<T> getAndRemove() {
         List<T> list = new ArrayList<>();
         List<T> needDeleteList;
         if (CollectionUtils.isEmpty(taskRList)) {

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 
 import org.poison.task.distinct.Handle2;
-import org.poison.task.distinct.ShardingHandler;
+import org.poison.task.distinct.ShardingHandlerA;
 import org.poison.task.task.Task;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +23,7 @@ public class TestController {
     private ObjectMapper objectMapper;
 
     @Resource
-    private ShardingHandler handler;
+    private ShardingHandlerA handler;
 
     @Resource
     private Handle2 handle2;
