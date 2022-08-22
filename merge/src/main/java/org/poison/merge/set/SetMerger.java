@@ -1,6 +1,5 @@
-package org.poison.merge.planB;
+package org.poison.merge.set;
 
-import org.poison.merge.Merger;
 import org.redisson.api.RQueue;
 import org.redisson.api.RSet;
 import org.redisson.api.RedissonClient;
@@ -11,7 +10,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
-public abstract class MergerB<T> implements Merger<T> {
+public abstract class SetMerger<T>{
 
     @Resource
     private RedissonClient redissonClient;
@@ -42,7 +41,6 @@ public abstract class MergerB<T> implements Merger<T> {
         taskSet = redissonClient.getSet(getSetName());
     }
 
-    @Override
     public void add(T t) {
         taskQueue.add(t);
         taskSet.add(t);
@@ -51,7 +49,6 @@ public abstract class MergerB<T> implements Merger<T> {
     /**
      * lpop不会有并发问题
      */
-    @Override
     public List<T> get() {
         List<T> resultList = new ArrayList<>();
         //只取set中有的，取出来之后在Set中remove

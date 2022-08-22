@@ -1,8 +1,7 @@
-package org.poison.merge.planA;
+package org.poison.merge.queue;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.poison.merge.Merger;
 import org.redisson.api.RQueue;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
@@ -19,7 +18,7 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @Component
-public abstract class MergerA<T> implements Merger<T> {
+public abstract class QueueMerger<T>{
 
     @Resource
     private RedissonClient redissonClient;
@@ -43,7 +42,7 @@ public abstract class MergerA<T> implements Merger<T> {
     private RQueue<T> taskQueue;
 
     @PostConstruct
-    private void postConstruct() {
+    protected void postConstruct() {
         taskQueue = redissonClient.getQueue(getTaskName());
     }
 

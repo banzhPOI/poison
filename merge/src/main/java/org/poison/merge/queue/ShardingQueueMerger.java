@@ -1,8 +1,7 @@
-package org.poison.merge.planA;
+package org.poison.merge.queue;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.poison.merge.Merger;
 import org.poison.merge.ShardingBaseTask;
 import org.poison.starter.utils.ShardingUtils;
 import org.redisson.api.RQueue;
@@ -24,7 +23,7 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @Component
-public abstract class ShardingMergerA<T extends ShardingBaseTask> implements Merger<T> {
+public abstract class ShardingQueueMerger<T extends ShardingBaseTask> extends QueueMerger<T> {
 
     private static final int DEFAULT_SHADING_NUM = 8;
 
@@ -32,22 +31,11 @@ public abstract class ShardingMergerA<T extends ShardingBaseTask> implements Mer
     private RedissonClient redissonClient;
 
     /**
-     * 任务名
-     */
-    protected abstract String getTaskName();
-
-    /**
-     * 每次取任务的窗口数量，分片后就是每个分片都取这么多
-     */
-    protected abstract int getWindowNum();
-
-    /**
      * 获取分片数量
      */
     protected int getShadingNum() {
         return DEFAULT_SHADING_NUM;
     }
-
 
     private final Map<Integer, RQueue<T>> shardingTaskQueueMap = new HashMap<>();
 
@@ -59,8 +47,9 @@ public abstract class ShardingMergerA<T extends ShardingBaseTask> implements Mer
     /**
      * 初始化的时候要初始化所有分片，并且放到map里
      */
+    @Override
     @PostConstruct
-    private void postConstruct() {
+    protected void postConstruct() {
         List<String> shardingNameList = getShardingTaskNameList();
         for (int i = 0; i < shardingNameList.size(); i++) {
             shardingTaskQueueMap.put(i, redissonClient.getQueue(shardingNameList.get(i)));
@@ -79,14 +68,9 @@ public abstract class ShardingMergerA<T extends ShardingBaseTask> implements Mer
     }
 
     /**
-     * 取任务线程池数量
-     * 重写这个方法，调用get()来获取任务
-     */
-    protected abstract void handleTask();
-
-    /**
      * 插入任务
      */
+    @Override
     public void add(T t) {
         getQueue(t.getShardingKey()).add(t);
     }
@@ -94,6 +78,7 @@ public abstract class ShardingMergerA<T extends ShardingBaseTask> implements Mer
     /**
      * 获取任务
      */
+    @Override
     public List<T> get() {
         List<T> list = new ArrayList<>();
         shardingTaskQueueMap.forEach((k, v) -> list.addAll(get(v)));

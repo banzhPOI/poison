@@ -5,8 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.poison.task.distinct.Handle;
 import org.poison.task.distinct.Handle2;
-import org.poison.task.distinct.ShardingHandlerA;
+import org.poison.task.distinct.ShardingHandlerQueue;
 import org.poison.task.task.Task;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,10 @@ public class TestController {
     private ObjectMapper objectMapper;
 
     @Resource
-    private ShardingHandlerA handler;
+    private ShardingHandlerQueue shardingHandler;
+
+    @Resource
+    private Handle handle;
 
     @Resource
     private Handle2 handle2;
@@ -41,7 +45,7 @@ public class TestController {
                 } catch (JsonProcessingException e) {
                     throw new RuntimeException(e);
                 }
-                handler.add(t);
+                handle.add(t);
             });
             thread.start();
         }
@@ -50,13 +54,13 @@ public class TestController {
             Thread thread = new Thread(() -> {
                 Task t = new Task();
                 t.setId((long) finalI);
-                t.setShardingKey("abc2");
+                t.setShardingKey("abc");
                 try {
                     log.info("add task: {}", objectMapper.writeValueAsString(t));
                 } catch (JsonProcessingException e) {
                     throw new RuntimeException(e);
                 }
-                handler.add(t);
+                handle.add(t);
             });
             thread.start();
         }
@@ -83,6 +87,6 @@ public class TestController {
 
     @PostMapping(value = "get")
     public void get() {
-        handler.handleTask();
+        handle.handleTask();
     }
 }

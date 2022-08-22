@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import org.poison.merge.planA.ShardingMergerA;
 import org.poison.task.task.Task;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -16,7 +15,7 @@ import javax.annotation.Resource;
 
 @Slf4j
 @Component
-public class ShardingHandlerA extends ShardingMergerA<Task> {
+public class ShardingHandlerQueue extends ShardingMergerA<Task> {
 
     @Resource
     private ObjectMapper objectMapper;
