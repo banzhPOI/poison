@@ -3,13 +3,10 @@ package org.poison.merge.planA;
 import lombok.extern.slf4j.Slf4j;
 
 import org.poison.merge.Merger;
-import org.redisson.api.RList;
-import org.redisson.api.RLock;
+import org.redisson.api.RQueue;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,60 +40,27 @@ public abstract class MergerA<T> implements Merger<T> {
      */
     protected abstract void handleTask();
 
-    private RList<T> taskRList;
+    private RQueue<T> taskQueue;
 
     @PostConstruct
     private void postConstruct() {
-        taskRList = redissonClient.getList(getTaskName());
+        taskQueue = redissonClient.getQueue(getTaskName());
     }
 
     /**
      * 插入任务
      */
     public void add(T t) {
-        taskRList.add(t);
+        taskQueue.add(t);
     }
 
     /**
      * 获取任务
-     * 需要保证同一时间只有一个线程在运行
+     * 并且删除队列中一样的元素
      */
     public List<T> get() {
-        List<T> taskList = new ArrayList<>();
-        RLock rLock = redissonClient.getLock(getTaskName() + "_LOCK");
-        try {
-            if (rLock.tryLock()) {
-                try {
-                    taskList = getAndRemove();
-                } finally {
-                    if (rLock.isLocked() && rLock.isHeldByCurrentThread()) {
-                        rLock.unlock();
-                    }
-                }
-            }
-        } catch (Exception e) {
-            log.error("get task is abnormal", e);
-        }
-        return taskList;
-    }
-
-    /**
-     * 获取并清理任务
-     */
-    private List<T> getAndRemove() {
-        List<T> list = new ArrayList<>();
-        List<T> needDeleteList;
-        if (CollectionUtils.isEmpty(taskRList)) {
-            return list;
-        }
-        if (taskRList.size() <= getWindowNum()) {
-            needDeleteList = taskRList;
-        } else {
-            needDeleteList = taskRList.subList(0, getWindowNum());
-        }
-        list = needDeleteList;
-        taskRList.removeAll(needDeleteList);
+        List<T> list = taskQueue.poll(getWindowNum());
+        taskQueue.removeAll(list);
         return list.stream().distinct().collect(Collectors.toList());
     }
-
 }

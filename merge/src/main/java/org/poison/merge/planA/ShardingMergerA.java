@@ -5,11 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.poison.merge.Merger;
 import org.poison.merge.ShardingBaseTask;
 import org.poison.starter.utils.ShardingUtils;
-import org.redisson.api.RList;
-import org.redisson.api.RLock;
+import org.redisson.api.RQueue;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,11 +49,11 @@ public abstract class ShardingMergerA<T extends ShardingBaseTask> implements Mer
     }
 
 
-    private final Map<Integer, RList<T>> shardingTaskListMap = new HashMap<>();
+    private final Map<Integer, RQueue<T>> shardingTaskQueueMap = new HashMap<>();
 
 
-    private RList<T> getRList(String shardingKey) {
-        return shardingTaskListMap.get(ShardingUtils.getShardingNum(shardingKey, getShadingNum()));
+    private RQueue<T> getQueue(String shardingKey) {
+        return shardingTaskQueueMap.get(ShardingUtils.getShardingNum(shardingKey, getShadingNum()));
     }
 
     /**
@@ -65,7 +63,7 @@ public abstract class ShardingMergerA<T extends ShardingBaseTask> implements Mer
     private void postConstruct() {
         List<String> shardingNameList = getShardingTaskNameList();
         for (int i = 0; i < shardingNameList.size(); i++) {
-            shardingTaskListMap.put(i, redissonClient.getList(shardingNameList.get(i)));
+            shardingTaskQueueMap.put(i, redissonClient.getQueue(shardingNameList.get(i)));
         }
     }
 
@@ -90,59 +88,21 @@ public abstract class ShardingMergerA<T extends ShardingBaseTask> implements Mer
      * 插入任务
      */
     public void add(T t) {
-        RList<T> taskRList = getRList(t.getShardingKey());
-        taskRList.add(t);
+        getQueue(t.getShardingKey()).add(t);
     }
 
     /**
      * 获取任务
-     * 需要保证同一时间只有一个线程在运行
      */
     public List<T> get() {
-        List<T> taskList = new ArrayList<>();
-        RLock rLock = redissonClient.getLock(getTaskName() + "_LOCK");
-        try {
-            if (rLock.tryLock()) {
-                try {
-                    taskList = getAndRemove();
-                } finally {
-                    if (rLock.isLocked() && rLock.isHeldByCurrentThread()) {
-                        rLock.unlock();
-                    }
-                }
-            }
-        } catch (Exception e) {
-            log.error("get task is abnormal", e);
-        }
-        return taskList;
-    }
-
-    private List<T> getAndRemove() {
         List<T> list = new ArrayList<>();
-        shardingTaskListMap.forEach((k, v) -> {
-            list.addAll(getAndRemove(v));
-        });
+        shardingTaskQueueMap.forEach((k, v) -> list.addAll(get(v)));
         return list;
     }
 
-    /**
-     * 获取并清理任务
-     */
-    private List<T> getAndRemove(RList<T> taskRList) {
-
-        List<T> list = new ArrayList<>();
-        List<T> needDeleteList;
-        if (CollectionUtils.isEmpty(taskRList)) {
-            return list;
-        }
-        if (taskRList.size() <= getWindowNum()) {
-            needDeleteList = taskRList;
-        } else {
-            needDeleteList = taskRList.subList(0, getWindowNum());
-        }
-        list = needDeleteList;
-        taskRList.removeAll(needDeleteList);
+    private List<T> get(RQueue<T> taskQueue) {
+        List<T> list = taskQueue.poll(getWindowNum());
+        taskQueue.removeAll(list);
         return list.stream().distinct().collect(Collectors.toList());
     }
-
 }

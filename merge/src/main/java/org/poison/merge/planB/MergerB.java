@@ -41,13 +41,16 @@ public abstract class MergerB<T> implements Merger<T> {
         taskQueue = redissonClient.getQueue(getQueueName());
         taskSet = redissonClient.getSet(getSetName());
     }
-    
+
     @Override
     public void add(T t) {
         taskQueue.add(t);
         taskSet.add(t);
     }
 
+    /**
+     * lpop不会有并发问题
+     */
     @Override
     public List<T> get() {
         List<T> resultList = new ArrayList<>();
