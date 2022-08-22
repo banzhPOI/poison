@@ -1,11 +1,9 @@
 package org.poison.merge.planB;
 
 import org.poison.merge.Merger;
-import org.redisson.api.RList;
 import org.redisson.api.RQueue;
 import org.redisson.api.RSet;
 import org.redisson.api.RedissonClient;
-import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,60 +32,44 @@ public abstract class MergerB<T> implements Merger<T> {
      */
     protected abstract void handleTask();
 
-    private RList<T> taskList;
+    private RQueue<T> taskQueue;
 
     private RSet<T> taskSet;
 
     @PostConstruct
     private void postConstruct() {
-        taskList = redissonClient.getList(getListName());
+        taskQueue = redissonClient.getQueue(getQueueName());
         taskSet = redissonClient.getSet(getSetName());
     }
-
-
+    
     @Override
     public void add(T t) {
-        taskList.add(t);
+        taskQueue.add(t);
         taskSet.add(t);
     }
 
     @Override
     public List<T> get() {
-        List<T> list;
         List<T> resultList = new ArrayList<>();
-        if (CollectionUtils.isEmpty(taskList)) {
-            return new ArrayList<>();
-        }
-        if (taskList.size() <= getWindowNum()) {
-            list = taskList;
-            taskList.clear();
-        } else {
-            list = taskList.subList(0, getWindowNum());
-            taskList.p(0,getWindowNum());
-        }
-        //只取set中有的
-        for (T t : list) {
-            if (taskSet.contains(t)) {
-                resultList.add(t);
-                //并且在Set中remove
-                taskSet.remove(t);
-            }
-        }
+        //只取set中有的，取出来之后在Set中remove
+        taskQueue.poll(getWindowNum()).stream().filter(t -> taskSet.contains(t)).forEach(t -> {
+            resultList.add(t);
+            taskSet.remove(t);
+        });
         return resultList;
     }
 
     /**
-     * list名
+     * queue名
      */
-    private String getListName(){
-        return getTaskName()+"_LIST";
+    private String getQueueName() {
+        return getTaskName() + "_QUEUE";
     }
 
     /**
      * set名
      */
-    private String getSetName(){
-        return getTaskName()+"_SET";
+    private String getSetName() {
+        return getTaskName() + "_SET";
     }
-
 }
