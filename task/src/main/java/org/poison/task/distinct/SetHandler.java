@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 
 @Slf4j
 @Component
-public class Handle2 extends SetMerger<Task> {
+public class SetHandler extends SetMerger<Task> {
 
     @Resource
     private ObjectMapper objectMapper;
@@ -48,7 +48,7 @@ public class Handle2 extends SetMerger<Task> {
     public void handleTask() {
         List<Task> taskList = get();
         for (Task task : taskList) {
-            log.info("handle2 task : {}", objectMapper.writeValueAsString(task));
+            log.info("handle task : {}", objectMapper.writeValueAsString(task));
         }
     }
 }

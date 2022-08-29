@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 public abstract class SetMerger<T extends BaseTask>{
 
     @Resource
-    private RedissonClient redissonClient;
+    private RedissonClient redisson;
 
     /**
      * 任务名
@@ -26,24 +26,23 @@ public abstract class SetMerger<T extends BaseTask>{
     protected abstract int getWindowNum();
 
     /**
-     * 取任务线程池数量
      * 重写这个方法，调用get()来获取任务
      */
     protected abstract void handleTask();
 
-    private RQueue<T> taskQueue;
+    private RQueue<T> queue;
 
-    private RSet<String> taskKeySet;
+    private RSet<String> uniqueKeySet;
 
     @PostConstruct
     private void postConstruct() {
-        taskQueue = redissonClient.getQueue(getQueueName());
-        taskKeySet = redissonClient.getSet(getSetName());
+        queue = redisson.getQueue(getQueueName());
+        uniqueKeySet = redisson.getSet(getSetName());
     }
 
     public void add(T t) {
-        taskQueue.add(t);
-        taskKeySet.add(t.getUniqueKey());
+        queue.add(t);
+        uniqueKeySet.add(t.getUniqueKey());
     }
 
     /**
@@ -52,9 +51,9 @@ public abstract class SetMerger<T extends BaseTask>{
     public List<T> get() {
         List<T> resultList = new ArrayList<>();
         //只取set中有的，取出来之后在Set中remove
-        taskQueue.poll(getWindowNum()).stream().filter(t -> taskKeySet.contains(t.getUniqueKey())).forEach(t -> {
+        queue.poll(getWindowNum()).stream().filter(t -> uniqueKeySet.contains(t.getUniqueKey())).forEach(t -> {
             resultList.add(t);
-            taskKeySet.remove(t.getUniqueKey());
+            uniqueKeySet.remove(t.getUniqueKey());
         });
         return resultList;
     }
