@@ -25,6 +25,7 @@
         <module>merge</module>
         <module>task</module>
         <module>redisson</module>
+        <module>elasticsearch</module>
     </modules>
 
 </project>

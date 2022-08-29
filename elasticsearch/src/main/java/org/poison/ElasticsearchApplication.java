@@ -2,14 +2,12 @@ package org.poison;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
-@EnableScheduling
 @SpringBootApplication
-public class TaskApplication {
+public class ElasticsearchApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TaskApplication.class, args);
+        SpringApplication.run(ElasticsearchApplication.class, args);
     }
 
 }

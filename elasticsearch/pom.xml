@@ -11,17 +11,13 @@
     </parent>
 
     <packaging>jar</packaging>
-    <artifactId>task</artifactId>
+    <artifactId>elasticsearch</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>org.poison</groupId>
             <artifactId>starter</artifactId>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.poison</groupId>
-            <artifactId>merge</artifactId>
         </dependency>
     </dependencies>
 
