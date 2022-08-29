@@ -2,7 +2,6 @@ package org.poison.merge.queue;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.poison.merge.BaseTask;
 import org.redisson.api.RQueue;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;

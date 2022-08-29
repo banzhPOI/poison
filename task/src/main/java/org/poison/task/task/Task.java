@@ -2,7 +2,7 @@ package org.poison.task.task;
 
 import lombok.Data;
 
-import org.poison.merge.ShardingBaseTask;
+import org.poison.merge.queue.ShardingBaseTask;
 
 @Data
 public class Task extends ShardingBaseTask {

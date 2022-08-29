@@ -1,4 +1,4 @@
-package org.poison.merge;
+package org.poison.merge.queue;
 
 import lombok.Data;
 

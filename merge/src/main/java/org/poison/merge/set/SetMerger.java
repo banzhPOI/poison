@@ -10,7 +10,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
-public abstract class SetMerger<T>{
+public abstract class SetMerger<T extends BaseTask>{
 
     @Resource
     private RedissonClient redissonClient;
@@ -33,17 +33,17 @@ public abstract class SetMerger<T>{
 
     private RQueue<T> taskQueue;
 
-    private RSet<T> taskSet;
+    private RSet<String> taskKeySet;
 
     @PostConstruct
     private void postConstruct() {
         taskQueue = redissonClient.getQueue(getQueueName());
-        taskSet = redissonClient.getSet(getSetName());
+        taskKeySet = redissonClient.getSet(getSetName());
     }
 
     public void add(T t) {
         taskQueue.add(t);
-        taskSet.add(t);
+        taskKeySet.add(t.getUniqueKey());
     }
 
     /**
@@ -52,9 +52,9 @@ public abstract class SetMerger<T>{
     public List<T> get() {
         List<T> resultList = new ArrayList<>();
         //只取set中有的，取出来之后在Set中remove
-        taskQueue.poll(getWindowNum()).stream().filter(t -> taskSet.contains(t)).forEach(t -> {
+        taskQueue.poll(getWindowNum()).stream().filter(t -> taskKeySet.contains(t.getUniqueKey())).forEach(t -> {
             resultList.add(t);
-            taskSet.remove(t);
+            taskKeySet.remove(t.getUniqueKey());
         });
         return resultList;
     }
