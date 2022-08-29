@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.poison.merge.ack.UseAck;
 import org.poison.task.distinct.SetHandler;
 import org.poison.task.task.Task;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,5 +39,12 @@ public class TestController {
             t.setContent("ABC"+1);
             setHandler.add(t);
         }
+    }
+
+
+    @UseAck
+    @PostMapping(value = "get")
+    public void get() {
+        setHandler.handleTask();
     }
 }
