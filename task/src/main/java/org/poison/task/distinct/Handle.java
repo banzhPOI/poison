@@ -42,13 +42,20 @@ public class Handle extends QueueMerger<Task> {
     /**
      * todo 失败的消息重写加入队列
      */
-    @Scheduled(fixedDelay = INTERVAL_TIME)
+//    @Scheduled(fixedDelay = INTERVAL_TIME)
     @SneakyThrows
     @Override
     public void handleTask() {
         List<Task> taskList = get();
         for (Task task : taskList) {
-            log.info("handle task : {}", objectMapper.writeValueAsString(task));
+            try{
+                log.info("handle task : {}", objectMapper.writeValueAsString(task));
+
+
+            }catch (Exception e){
+                log.error("handle task error: {}", e);
+                add(task);
+            }
         }
     }
 }

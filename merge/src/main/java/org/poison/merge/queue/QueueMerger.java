@@ -2,6 +2,7 @@ package org.poison.merge.queue;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.poison.merge.BaseTask;
 import org.redisson.api.RQueue;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,7 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @Component
-public abstract class QueueMerger<T>{
+public abstract class QueueMerger<T extends BaseTask>{
 
     @Resource
     private RedissonClient redissonClient;
