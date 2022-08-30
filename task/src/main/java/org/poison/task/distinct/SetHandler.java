@@ -1,5 +1,6 @@
 package org.poison.task.distinct;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.SneakyThrows;
@@ -9,6 +10,7 @@ import org.poison.common.exception.BizException;
 import org.poison.merge.ack.UseAck;
 import org.poison.merge.set.SetMerger;
 import org.poison.task.task.Task;
+import org.springframework.aop.framework.AopContext;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -45,18 +47,26 @@ public class SetHandler extends SetMerger<Task> {
      * todo 失败的消息重写加入队列
      */
 //    @Scheduled(fixedDelay = INTERVAL_TIME)
-    @UseAck
     @Override
     public void handleTask() {
-        List<Task> taskList = get();
-        for (Task task : taskList) {
-            handle(task);
-        }
+//        List<Task> taskList = get();
+//        for (Task task : taskList) {
+//            handle(task);
+//        }
+
+
+        ((SetHandler) AopContext.currentProxy()).handle(null);
+
     }
 
-    @SneakyThrows
+    @UseAck
     public void handle(Task task){
-        log.info("handle task : {}", objectMapper.writeValueAsString(task));
+
+//        try {
+//            log.info("handle task : {}", objectMapper.writeValueAsString(task));
+//        } catch (JsonProcessingException e) {
+//            throw new RuntimeException(e);
+//        }
         throw new BizException("wtf");
     }
 }

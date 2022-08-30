@@ -41,8 +41,6 @@ public class TestController {
         }
     }
 
-
-    @UseAck
     @PostMapping(value = "get")
     public void get() {
         setHandler.handleTask();
