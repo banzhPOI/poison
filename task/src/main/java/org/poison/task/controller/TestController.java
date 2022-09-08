@@ -84,4 +84,14 @@ public class TestController {
         log.info("finish");
         
     }
+
+    @Resource
+    private TestScheduled testScheduled;
+
+    @PostMapping(value = "test")
+    public void test() {
+        for (int i =0;i<10000;i++){
+            testScheduled.test();
+        }
+    }
 }
