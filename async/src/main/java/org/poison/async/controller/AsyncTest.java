@@ -15,6 +15,16 @@ public class AsyncTest {
         log.info("Scheduled-1");
     }
 
+    @Scheduled(fixedDelay = 1000)
+    public void scheduled2(){
+        log.info("Scheduled-2");
+    }
+
+    @Scheduled(fixedDelay = 1000)
+    public void scheduled3(){
+        log.info("Scheduled-3");
+    }
+
     @Async
     public void test(){
         try {
