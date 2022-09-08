@@ -26,6 +26,7 @@
         <module>task</module>
         <module>redisson</module>
         <module>elasticsearch</module>
+        <module>async</module>
     </modules>
 
 </project>
