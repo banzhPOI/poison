@@ -12,18 +12,23 @@ public class AsyncTest {
 
     @Scheduled(fixedDelay = 1000)
     public void scheduled1(){
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         log.info("Scheduled-1");
     }
 
-    @Scheduled(fixedDelay = 1000)
-    public void scheduled2(){
-        log.info("Scheduled-2");
-    }
-
-    @Scheduled(fixedDelay = 1000)
-    public void scheduled3(){
-        log.info("Scheduled-3");
-    }
+//    @Scheduled(fixedDelay = 1000)
+//    public void scheduled2(){
+//        log.info("Scheduled-2");
+//    }
+//
+//    @Scheduled(fixedDelay = 1000)
+//    public void scheduled3(){
+//        log.info("Scheduled-3");
+//    }
 
     @Async
     public void test(){
