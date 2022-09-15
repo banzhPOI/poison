@@ -1,6 +1,7 @@
-package org.poison.merge.queue;
+package org.poison.merge;
 
 import lombok.extern.slf4j.Slf4j;
+
 
 import org.poison.starter.utils.ShardingUtils;
 import org.redisson.api.RQueue;
@@ -18,16 +19,22 @@ import javax.annotation.Resource;
 
 /**
  * 重写"任务名",取任务窗口数量","取任务线程池数量"三个方法
- * 原理：利用redis的RList取出任务时清理列表中全部相同任务
+ * 还要自定义一个Sharding算法
+ * 原理：
+ * 1.插入任务的时候同时插入RList和RSet
+ * 2.取出任务的时候从RList取出来的时候同时从RSet中移除这条数据，如果移除失败，就丢弃这条数据，证明之前消费过了
  */
 @Slf4j
 @Component
-public abstract class ShardingQueueMerger<T extends ShardingBaseTask> extends QueueMerger<T> {
-
-    private static final int DEFAULT_SHADING_NUM = 8;
+public abstract class ShardingMerger<T extends ShardingBaseTask> extends Merger<T> {
 
     @Resource
-    private RedissonClient redissonClient;
+    private RedissonClient redisson;
+
+    /**
+     * 默认分片数量为8
+     */
+    private static final int DEFAULT_SHADING_NUM = 8;
 
     /**
      * 获取分片数量
@@ -38,7 +45,9 @@ public abstract class ShardingQueueMerger<T extends ShardingBaseTask> extends Qu
 
     private final Map<Integer, RQueue<T>> shardingTaskQueueMap = new HashMap<>();
 
-
+    /**
+     * 根据shardingKey获取对应分片的队列
+     */
     private RQueue<T> getQueue(String shardingKey) {
         return shardingTaskQueueMap.get(ShardingUtils.getShardingNum(shardingKey, getShadingNum()));
     }
@@ -51,12 +60,12 @@ public abstract class ShardingQueueMerger<T extends ShardingBaseTask> extends Qu
     protected void postConstruct() {
         List<String> shardingNameList = getShardingTaskNameList();
         for (int i = 0; i < shardingNameList.size(); i++) {
-            shardingTaskQueueMap.put(i, redissonClient.getQueue(shardingNameList.get(i)));
+            shardingTaskQueueMap.put(i, redisson.getQueue(shardingNameList.get(i)));
         }
     }
 
     /**
-     * 分片后的队列列表
+     * 分片后的队列所有列表
      */
     private List<String> getShardingTaskNameList() {
         List<String> shardingList = new ArrayList<>();
