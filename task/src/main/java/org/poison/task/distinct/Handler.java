@@ -20,7 +20,7 @@ public class Handler extends ShardingMerger<Task> {
     @Resource
     private ObjectMapper objectMapper;
 
-    private static final int INTERVAL_TIME = 1000;
+    private static final int INTERVAL_TIME = 5000;
 
     private static final int WINDOW_NUM = 100;
 
@@ -37,7 +37,7 @@ public class Handler extends ShardingMerger<Task> {
     }
 
 
-    @Scheduled(fixedDelay = INTERVAL_TIME)
+//    @Scheduled(fixedDelay = INTERVAL_TIME)
     @Override
     public void handleTask() {
         List<Task> taskList = get();

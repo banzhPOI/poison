@@ -2,9 +2,9 @@ package org.poison.merge;
 
 import lombok.extern.slf4j.Slf4j;
 
-
 import org.poison.starter.utils.ShardingUtils;
 import org.redisson.api.RQueue;
+import org.redisson.api.RSet;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
 
@@ -43,13 +43,23 @@ public abstract class ShardingMerger<T extends ShardingBaseTask> extends Merger<
         return DEFAULT_SHADING_NUM;
     }
 
-    private final Map<Integer, RQueue<T>> shardingTaskQueueMap = new HashMap<>();
+    private final Map<Integer, RQueue<T>> shardingQueueMap = new HashMap<>();
+
+    private final Map<Integer, RSet<String>> shardingUniqueKeySetMap = new HashMap<>();
+
 
     /**
      * 根据shardingKey获取对应分片的队列
      */
     private RQueue<T> getQueue(String shardingKey) {
-        return shardingTaskQueueMap.get(ShardingUtils.getShardingNum(shardingKey, getShadingNum()));
+        return shardingQueueMap.get(ShardingUtils.getShardingNum(shardingKey, getShadingNum()));
+    }
+
+    /**
+     * 根据shardingKey获取对应分片的set
+     */
+    private RSet<String> getUniqueKeySet(String shardingKey) {
+        return shardingUniqueKeySetMap.get(ShardingUtils.getShardingNum(shardingKey, getShadingNum()));
     }
 
     /**
@@ -60,7 +70,8 @@ public abstract class ShardingMerger<T extends ShardingBaseTask> extends Merger<
     protected void postConstruct() {
         List<String> shardingNameList = getShardingTaskNameList();
         for (int i = 0; i < shardingNameList.size(); i++) {
-            shardingTaskQueueMap.put(i, redisson.getQueue(shardingNameList.get(i)));
+            shardingQueueMap.put(i, redisson.getQueue(shardingNameList.get(i) + "_QUEUE"));
+            shardingUniqueKeySetMap.put(i, redisson.getSet(shardingNameList.get(i) + "_SET"));
         }
     }
 
@@ -81,6 +92,7 @@ public abstract class ShardingMerger<T extends ShardingBaseTask> extends Merger<
     @Override
     public void add(T t) {
         getQueue(t.getShardingKey()).add(t);
+        getUniqueKeySet(t.getShardingKey()).add(t.getUniqueKey());
     }
 
     /**
@@ -89,13 +101,12 @@ public abstract class ShardingMerger<T extends ShardingBaseTask> extends Merger<
     @Override
     public List<T> get() {
         List<T> list = new ArrayList<>();
-        shardingTaskQueueMap.forEach((k, v) -> list.addAll(get(v)));
+        shardingQueueMap.forEach((k, v) -> list.addAll(get(v, shardingUniqueKeySetMap.get(k))));
         return list;
     }
 
-    private List<T> get(RQueue<T> taskQueue) {
-        List<T> list = taskQueue.poll(getWindowNum());
-        taskQueue.removeAll(list);
-        return list.stream().distinct().collect(Collectors.toList());
+    private List<T> get(RQueue<T> queue, RSet<String> uniqueKeySet) {
+        //只取set中有的，取出来之后在Set中remove
+        return queue.poll(getWindowNum()).stream().filter(t -> uniqueKeySet.remove(t.getUniqueKey())).collect(Collectors.toList());
     }
 }

@@ -1,7 +1,5 @@
 package org.poison.task.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import lombok.extern.slf4j.Slf4j;
 
 import org.poison.task.distinct.Handler;
@@ -37,4 +35,10 @@ public class TestController {
             handler.add(t);
         }
     }
+
+    @PostMapping(value = "get")
+    public void get() {
+        handler.handleTask();
+    }
+
 }
