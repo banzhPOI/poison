@@ -22,7 +22,7 @@
         <module>statemachine</module>
         <module>websocket</module>
         <module>workflow</module>
-        <module>merge</module>
+        <module>compactqueue</module>
         <module>task</module>
         <module>redisson</module>
         <module>elasticsearch</module>
