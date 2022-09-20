@@ -105,7 +105,7 @@ public abstract class ShardingMerger<T extends ShardingBaseTask> extends Merger<
         return list;
     }
 
-    private List<T> get(RQueue<T> queue, RSet<String> uniqueKeySet) {
+    protected List<T> get(RQueue<T> queue, RSet<String> uniqueKeySet) {
         //只取set中有的，取出来之后在Set中remove
         return queue.poll(getWindowNum()).stream().filter(t -> uniqueKeySet.remove(t.getUniqueKey())).collect(Collectors.toList());
     }
