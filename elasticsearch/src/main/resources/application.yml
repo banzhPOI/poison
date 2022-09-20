@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    elasticsearch:
+      address: es-cn-i7m2um2wh00042xyw.public.elasticsearch.aliyuncs.com
+      port: 9200
+      username: elastic
+      password: Taobuchu0

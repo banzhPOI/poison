@@ -3,13 +3,14 @@ package org.poison.elasticsearch.config;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 @Data
-@Slf4j
-@Configuration
+@Component
+@ConfigurationProperties(prefix = "spring.datasource.elasticsearch")
 public class ElasticsearchConfig {
-
 
     /**
      * 协议
@@ -17,9 +18,24 @@ public class ElasticsearchConfig {
     private String schema = "http";
 
     /**
-     * 集群地址，如果有多个用“,”隔开
+     * 地址
      */
-    private String address = "es-cn-i7m2um2wh00042xyw.public.elasticsearch.aliyuncs.com:9200";
+    private String address;
+
+    /**
+     * 端口号
+     */
+    private int port;
+
+    /**
+     * 的用户名
+     */
+    private String username;
+
+    /**
+     * 密码
+     */
+    private String password;
 
     /**
      * 连接超时时间
@@ -27,7 +43,7 @@ public class ElasticsearchConfig {
     private int connectTimeout = 10000;
 
     /**
-     * Socket 连接超时时间
+     * Socket连接超时时间
      */
     private int socketTimeout = 15000;
 
@@ -45,20 +61,4 @@ public class ElasticsearchConfig {
      * 最大路由连接数
      */
     private int maxConnectPerRoute = 100;
-
-    /**
-     * 连接ES的用户名
-     */
-    private String username = "elastic";
-
-    /**
-     * 数据查询的索引
-     */
-    private String index;
-
-    /**
-     * 密码
-     */
-    private String passwd;
-
 }
