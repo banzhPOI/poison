@@ -4,9 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.poison.merge.ShardingMerger;
+import org.poison.compactqueue.ShardingCompaction;
 import org.poison.task.task.Task;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,7 +14,7 @@ import javax.annotation.Resource;
 
 @Slf4j
 @Component
-public class Handler extends ShardingMerger<Task> {
+public class Handler extends ShardingCompaction<Task> {
 
     @Resource
     private ObjectMapper objectMapper;

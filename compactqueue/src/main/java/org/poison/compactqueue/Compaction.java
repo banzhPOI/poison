@@ -1,4 +1,4 @@
-package org.poison.merge;
+package org.poison.compactqueue;
 
 import org.redisson.api.RQueue;
 import org.redisson.api.RSet;
@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * 2.取出任务的时候从RList取出来的时候同时从RSet中移除这条数据，如果移除失败，就丢弃这条数据，证明之前消费过了
  */
 
-public abstract class Merger<T extends BaseTask> {
+public abstract class Compaction<T extends BaseTask> {
 
     @Resource
     private RedissonClient redisson;

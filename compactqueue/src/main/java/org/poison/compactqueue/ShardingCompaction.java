@@ -1,4 +1,4 @@
-package org.poison.merge;
+package org.poison.compactqueue;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,7 +26,7 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @Component
-public abstract class ShardingMerger<T extends ShardingBaseTask> extends Merger<T> {
+public abstract class ShardingCompaction<T extends ShardingBaseTask> extends Compaction<T> {
 
     @Resource
     private RedissonClient redisson;
