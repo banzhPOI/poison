@@ -1,4 +1,4 @@
-package org.poison.elasticsearch.config;
+package org.poison.elasticsearch.starter;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;

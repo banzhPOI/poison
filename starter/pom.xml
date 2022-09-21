@@ -24,7 +24,7 @@
     </dependencies>
 
     <modules>
-        <module>spring-elasticsearch-starter</module>
+        <module>elasticsearch-starter</module>
         <module>spring-web-starter</module>
     </modules>
 

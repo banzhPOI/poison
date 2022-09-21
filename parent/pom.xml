@@ -23,6 +23,8 @@
         <compactqueue.version>0.0.1-SNAPSHOT</compactqueue.version>
 
         <redisson.version>3.17.5</redisson.version>
+        <elasticsearch.version>7.16.2</elasticsearch.version>
+        <jakarta.version>2.0.1</jakarta.version>
     </properties>
 
     <dependencyManagement>
@@ -58,9 +60,25 @@
                 <version>${compactqueue.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.poison</groupId>
+                <artifactId>elasticsearch-starter</artifactId>
+                <version>${starter.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
                 <version>${redisson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>co.elastic.clients</groupId>
+                <artifactId>elasticsearch-java</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.json</groupId>
+                <artifactId>jakarta.json-api</artifactId>
+                <version>${jakarta.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
