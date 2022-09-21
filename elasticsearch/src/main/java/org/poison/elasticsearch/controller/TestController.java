@@ -3,6 +3,7 @@ package org.poison.elasticsearch.controller;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,17 +23,15 @@ public class TestController {
     private ElasticsearchClient elasticsearchClient;
 
 
+    @SneakyThrows
     @PostMapping(value = "add")
     public void add() {
         CreateIndexResponse createIndexResponse = null;
-        try {
-            createIndexResponse = elasticsearchClient.indices()
-                .create(createIndexRequest ->
-                    createIndexRequest.index("elasticsearch-client")
-                );
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        createIndexResponse = elasticsearchClient.indices()
+            .create(createIndexRequest ->
+                createIndexRequest.index("elasticsearch-client")
+            );
+
         log.info("== {} 索引创建是否成功: {}", "elasticsearch-client", createIndexResponse.acknowledged());
 
     }

@@ -1,4 +1,4 @@
-package org.poison.starter.config;
+package org.poison.spring.web.starter.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

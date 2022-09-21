@@ -2,7 +2,7 @@ package org.poison.compactqueue;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.poison.starter.utils.ShardingUtils;
+import org.poison.spring.web.starter.utils.ShardingUtils;
 import org.redisson.api.RQueue;
 import org.redisson.api.RSet;
 import org.redisson.api.RedissonClient;

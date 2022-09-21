@@ -11,12 +11,12 @@
     </parent>
 
     <packaging>jar</packaging>
-    <artifactId>merge</artifactId>
+    <artifactId>compactqueue</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>org.poison</groupId>
-            <artifactId>starter</artifactId>
+            <artifactId>spring-web-starter</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>

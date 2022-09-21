@@ -1,4 +1,4 @@
-package org.poison.starter.utils;
+package org.poison.spring.web.starter.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

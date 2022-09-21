@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.1</version>
+        <version>2.7.3</version>
         <relativePath/>
     </parent>
 
@@ -20,7 +20,7 @@
         <common.version>0.0.1-SNAPSHOT</common.version>
         <statemachine.version>0.0.1-SNAPSHOT</statemachine.version>
         <workflow.version>0.0.1-SNAPSHOT</workflow.version>
-        <merge.version>0.0.1-SNAPSHOT</merge.version>
+        <compactqueue.version>0.0.1-SNAPSHOT</compactqueue.version>
 
         <redisson.version>3.17.5</redisson.version>
     </properties>
@@ -29,7 +29,12 @@
         <dependencies>
             <dependency>
                 <groupId>org.poison</groupId>
-                <artifactId>starter</artifactId>
+                <artifactId>spring-web-starter</artifactId>
+                <version>${starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.poison</groupId>
+                <artifactId>spring-elasticsearch-starter</artifactId>
                 <version>${starter.version}</version>
             </dependency>
             <dependency>
@@ -49,8 +54,8 @@
             </dependency>
             <dependency>
                 <groupId>org.poison</groupId>
-                <artifactId>merge</artifactId>
-                <version>${merge.version}</version>
+                <artifactId>compactqueue</artifactId>
+                <version>${compactqueue.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.redisson</groupId>

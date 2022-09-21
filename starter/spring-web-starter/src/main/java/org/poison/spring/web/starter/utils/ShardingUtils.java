@@ -1,4 +1,4 @@
-package org.poison.starter.utils;
+package org.poison.spring.web.starter.utils;
 
 public class ShardingUtils {
     public static int getShardingNum(String shardingKey,int shardingNum){

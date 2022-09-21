@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>org.poison</groupId>
-            <artifactId>starter</artifactId>
+            <artifactId>spring-web-starter</artifactId>
             <optional>true</optional>
         </dependency>
     </dependencies>

@@ -16,12 +16,12 @@
     <dependencies>
         <dependency>
             <groupId>org.poison</groupId>
-            <artifactId>starter</artifactId>
+            <artifactId>spring-web-starter</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.poison</groupId>
-            <artifactId>merge</artifactId>
+            <artifactId>compactqueue</artifactId>
         </dependency>
     </dependencies>
 

@@ -1,4 +1,4 @@
-package org.poison.starter.config;
+package org.poison.spring.web.starter.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
