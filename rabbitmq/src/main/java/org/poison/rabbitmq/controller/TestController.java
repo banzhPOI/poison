@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import javax.annotation.Resource;
 
 @Slf4j
@@ -27,6 +29,8 @@ public class TestController {
         return "helloWorld";
     }
 
+    private AtomicInteger a = new AtomicInteger(0);
+
     @RabbitListener(queues = RabbitMqConstants.TEST_QUEUE, containerFactory = "testContainer")
     public void testListener(Message message) {
         String msgJson = new String(message.getBody());
@@ -35,14 +39,16 @@ public class TestController {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        log.info("RabbitListener receiveMessage message: {}", msgJson);
+        int t = a.getAndIncrement();
+        log.info("RabbitListener receiveMessage message: {} {}", msgJson, t);
     }
 
     @PostMapping(value = "")
     public String test(@RequestBody Body abc) {
+
         for (int i = 0; i < 100; i++) {
             abc.setB(i + "");
-            rabbitMqSender.sendDelayMessage(RabbitMqConstants.TEST_EXCHANGE, RabbitMqConstants.TEST_ROUTING_KEY, abc, 5000L);
+            rabbitMqSender.sendMessage(RabbitMqConstants.TEST_EXCHANGE, RabbitMqConstants.TEST_ROUTING_KEY, abc);
         }
         return "helloWorld";
     }

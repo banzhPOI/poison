@@ -1,6 +1,12 @@
 package org.poison.rabbitmq.mq;
 
-import org.springframework.amqp.core.*;
+import org.springframework.amqp.core.AcknowledgeMode;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.QueueBuilder;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -33,8 +39,8 @@ public class RabbitMqConfig {
     @Bean
     public Queue testDelayQueue() {
         return QueueBuilder.durable(RabbitMqConstants.TEST_DELAY_QUEUE)
-                .withArgument("x-dead-letter-exchange", RabbitMqConstants.TEST_EXCHANGE)
-                .build();
+            .withArgument("x-dead-letter-exchange", RabbitMqConstants.TEST_EXCHANGE)
+            .build();
     }
 
     /**
@@ -85,9 +91,9 @@ public class RabbitMqConfig {
     @Resource
     private SimpleRabbitListenerContainerFactoryConfigurer factoryConfigure;
 
-    private final static int CONCURRENT_CONSUMERS = 10;
+    private final static int CONCURRENT_CONSUMERS = 2;
 
-    private final static int MAX_CONCURRENT_CONSUMERS = 60;
+    private final static int MAX_CONCURRENT_CONSUMERS = 4;
 
     @Bean(name = "testContainer")
     SimpleRabbitListenerContainerFactory testContainer() {
@@ -100,12 +106,13 @@ public class RabbitMqConfig {
         factory.setMessageConverter(new Jackson2JsonMessageConverter());
         //是否手动ack
         factory.setAcknowledgeMode(AcknowledgeMode.AUTO);
-        //这里是设置多线程，如果没有配置默认是一个消费者消费，如果设置了多个消费者，那顺序就无法保证
+        //如果没有配置默认是一个消费者消费，如果设置了多个消费者，那顺序就无法保证
         factory.setConcurrentConsumers(concurrentConsumers);
         //最大消费者数量
         factory.setMaxConcurrentConsumers(maxConcurrentConsumers);
-        //一个消费者可以获取的最大消息数量
-        factory.setPrefetchCount(30);
+        //一个消费者可以预载的最大消息数量(或者说消费者未ack的消息数)，太多了会导致全积压在消费者内存里，太少了等异步ack的时候服务没事干
+        //参考：https://www.cnblogs.com/jajian/p/10293391.html
+        factory.setPrefetchCount(100);
         return factory;
     }
 
