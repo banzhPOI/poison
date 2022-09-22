@@ -85,7 +85,7 @@ public class RabbitMqConfig {
     @Resource
     private SimpleRabbitListenerContainerFactoryConfigurer factoryConfigure;
 
-    private final static int CONCURRENT_CONSUMERS = 30;
+    private final static int CONCURRENT_CONSUMERS = 10;
 
     private final static int MAX_CONCURRENT_CONSUMERS = 60;
 
@@ -98,9 +98,13 @@ public class RabbitMqConfig {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factoryConfigure.configure(factory, connectionFactory);
         factory.setMessageConverter(new Jackson2JsonMessageConverter());
+        //是否手动ack
         factory.setAcknowledgeMode(AcknowledgeMode.AUTO);
+        //这里是设置多线程，如果没有配置默认是一个消费者消费，如果设置了多个消费者，那顺序就无法保证
         factory.setConcurrentConsumers(concurrentConsumers);
+        //最大消费者数量
         factory.setMaxConcurrentConsumers(maxConcurrentConsumers);
+        //一个消费者可以获取的最大消息数量
         factory.setPrefetchCount(30);
         return factory;
     }
