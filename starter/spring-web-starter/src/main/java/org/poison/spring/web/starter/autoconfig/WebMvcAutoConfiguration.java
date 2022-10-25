@@ -1,11 +1,11 @@
-package org.poison.spring.web.starter.config;
+package org.poison.spring.web.starter.autoconfig;
 
+import org.poison.spring.web.starter.config.LoggingRequestInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Configuration
-public class WebMvcConfig implements WebMvcConfigurer {
+public class WebMvcAutoConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

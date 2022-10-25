@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.poison.spring.web.starter.autoconfig.LogAutoConfiguration,\
+org.poison.spring.web.starter.autoconfig.ObjectMapperAutoConfiguration,\
+org.poison.spring.web.starter.autoconfig.WebMvcAutoConfiguration,\
+org.poison.spring.web.starter.config.LoggingRequestInterceptor
