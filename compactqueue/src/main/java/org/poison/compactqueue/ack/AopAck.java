@@ -19,7 +19,7 @@ public class AopAck {
 
     @Resource
     private Compaction compaction;
-RMapCache
+
     @Pointcut("@annotation(org.poison.compactqueue.ack.UseAck)")
     public void aopPoint() {
     }
