@@ -3,11 +3,12 @@ package org.poison.compactqueue.ack;
 import lombok.extern.slf4j.Slf4j;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.poison.compactqueue.BaseTask;
 import org.poison.compactqueue.Compaction;
-import org.redisson.api.RMapCache;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -18,7 +19,7 @@ import javax.annotation.Resource;
 public class AopAck {
 
     @Resource
-    private Compaction compaction;
+    private Compaction<BaseTask> compaction;
 
     @Pointcut("@annotation(org.poison.compactqueue.ack.UseAck)")
     public void aopPoint() {
@@ -30,7 +31,9 @@ public class AopAck {
             pj.proceed();
         } catch (Exception e) {
             log.warn("task handle failed:", e);
-//            setMerger.add();
+            Object[] args = pj.getArgs();
+            BaseTask task = (BaseTask) args[0];
+            compaction.add(task);
         }
     }
 }

@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.poison.spring.snowflake.starter.SnowflakeConfig

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 
 import org.poison.compactqueue.ShardingCompaction;
+import org.poison.compactqueue.ack.UseAck;
 import org.poison.task.task.Task;
 import org.springframework.stereotype.Component;
 
@@ -36,12 +37,18 @@ public class Handler extends ShardingCompaction<Task> {
     }
 
 
-//    @Scheduled(fixedDelay = INTERVAL_TIME)
+    //    @Scheduled(fixedDelay = INTERVAL_TIME)
     @Override
     public void handleTask() {
         List<Task> taskList = get();
         for (Task task : taskList) {
+            handle(task);
             log.info(task.getId() + task.getContent());
         }
+    }
+
+    @UseAck
+    public void handle(Task task) {
+
     }
 }
