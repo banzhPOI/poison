@@ -1,0 +1,4 @@
+org.poison.starter.web.autoconfig.LogAutoConfiguration
+org.poison.starter.web.autoconfig.ObjectMapperAutoConfiguration
+org.poison.starter.web.autoconfig.WebMvcAutoConfiguration
+org.poison.starter.web.config.LoggingRequestInterceptor
