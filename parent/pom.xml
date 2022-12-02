@@ -30,17 +30,17 @@
             <!--starter-->
             <dependency>
                 <groupId>org.poison</groupId>
-                <artifactId>spring-web-starter</artifactId>
-                <version>${starter.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.poison</groupId>
-                <artifactId>spring-elasticsearch-starter</artifactId>
+                <artifactId>web-starter</artifactId>
                 <version>${starter.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.poison</groupId>
                 <artifactId>elasticsearch-starter</artifactId>
+                <version>${starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.poison</groupId>
+                <artifactId>snowflake-starter</artifactId>
                 <version>${starter.version}</version>
             </dependency>
 

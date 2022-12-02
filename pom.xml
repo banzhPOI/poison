@@ -16,7 +16,7 @@
         <module>parent</module>
         <module>common</module>
         <module>starter</module>
-        <module>compactqueue</module>
+        <module>components</module>
         <module>elasticsearch</module>
     </modules>
 

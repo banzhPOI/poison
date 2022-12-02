@@ -10,12 +10,13 @@
 
     <packaging>pom</packaging>
 
-    <artifactId>starter</artifactId>
+    <artifactId>compoments</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>org.poison</groupId>
+            <artifactId>web-starter</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.poison</groupId>
@@ -24,9 +25,7 @@
     </dependencies>
 
     <modules>
-        <module>web-starter</module>
-        <module>elasticsearch-starter</module>
-        <module>snowflake-starter</module>
+        <module>compactqueue</module>
     </modules>
 
 </project>

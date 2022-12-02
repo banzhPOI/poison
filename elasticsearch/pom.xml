@@ -20,7 +20,7 @@
         </dependency>
         <dependency>
             <groupId>org.poison</groupId>
-            <artifactId>spring-web-starter</artifactId>
+            <artifactId>web-starter</artifactId>
             <optional>true</optional>
         </dependency>
     </dependencies>
