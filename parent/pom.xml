@@ -18,8 +18,6 @@
     <properties>
         <starter.version>0.0.1-SNAPSHOT</starter.version>
         <common.version>0.0.1-SNAPSHOT</common.version>
-        <statemachine.version>0.0.1-SNAPSHOT</statemachine.version>
-        <workflow.version>0.0.1-SNAPSHOT</workflow.version>
         <compactqueue.version>0.0.1-SNAPSHOT</compactqueue.version>
 
         <redisson.version>3.17.5</redisson.version>
@@ -29,6 +27,7 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--starter-->
             <dependency>
                 <groupId>org.poison</groupId>
                 <artifactId>spring-web-starter</artifactId>
@@ -41,30 +40,26 @@
             </dependency>
             <dependency>
                 <groupId>org.poison</groupId>
+                <artifactId>elasticsearch-starter</artifactId>
+                <version>${starter.version}</version>
+            </dependency>
+
+            <!--common-->
+
+            <dependency>
+                <groupId>org.poison</groupId>
                 <artifactId>common</artifactId>
                 <version>${common.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.poison</groupId>
-                <artifactId>statemachine</artifactId>
-                <version>${statemachine.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.poison</groupId>
-                <artifactId>workflow</artifactId>
-                <version>${workflow.version}</version>
-            </dependency>
+
+            <!--internal-->
             <dependency>
                 <groupId>org.poison</groupId>
                 <artifactId>compactqueue</artifactId>
                 <version>${compactqueue.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.poison</groupId>
-                <artifactId>elasticsearch-starter</artifactId>
-                <version>${starter.version}</version>
-            </dependency>
 
+            <!--external-->
             <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
