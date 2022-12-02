@@ -5,13 +5,20 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.poison</groupId>
-        <artifactId>starter</artifactId>
+        <artifactId>poison</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>web-starter</artifactId>
+    <artifactId>template</artifactId>
 
     <packaging>jar</packaging>
 
-</project>
+    <dependencies>
+        <dependency>
+            <groupId>org.poison</groupId>
+            <artifactId>web-starter</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 
+</project>

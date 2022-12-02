@@ -1,21 +1,19 @@
 package org.poison.compactqueue;
 
 import lombok.extern.slf4j.Slf4j;
-
-import org.poison.spring.web.starter.utils.ShardingUtils;
+import org.poison.starter.web.utils.ShardingUtils;
 import org.redisson.api.RQueue;
 import org.redisson.api.RSet;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 
 /**
  * 重写"任务名",取任务窗口数量","取任务线程池数量"三个方法

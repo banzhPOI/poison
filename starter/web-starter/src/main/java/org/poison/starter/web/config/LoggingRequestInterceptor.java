@@ -1,21 +1,18 @@
 package org.poison.starter.web.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import lombok.SneakyThrows;
-import lombok.extern.log4j.Log4j2;
-
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-@Log4j2
+@Slf4j
 public class LoggingRequestInterceptor implements HandlerInterceptor {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
