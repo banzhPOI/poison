@@ -3,13 +3,13 @@ package org.poison.starter.web.utils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.annotation.Resource;
 import lombok.SneakyThrows;
 
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 
 
 /**
@@ -26,7 +26,7 @@ public class CloneUtils<T> {
      */
     @SneakyThrows
     public List<T> cloneList(List<T> oList) {
-        return objectMapper.readValue(objectMapper.writeValueAsString(oList), new TypeReference<List<T>>() {
+        return objectMapper.readValue(objectMapper.writeValueAsString(oList), new TypeReference<>() {
         });
 
     }

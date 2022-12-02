@@ -1,5 +1,6 @@
 package org.poison.starter.web.config;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.MediaType;
@@ -16,10 +17,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import java.lang.reflect.Type;
 
-import javax.servlet.http.HttpServletRequest;
-
 @RestControllerAdvice(annotations = RestController.class)
-public class RequestResponseBodyAdvice implements RequestBodyAdvice, ResponseBodyAdvice {
+public class RequestResponseBodyAdvice implements RequestBodyAdvice, ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(final MethodParameter mp, final Type targetType, final Class<? extends HttpMessageConverter<?>> hmc) {
