@@ -18,6 +18,8 @@
         <module>starter</module>
         <module>components</module>
         <module>elasticsearch</module>
+        <module>template</module>
+        <module>test</module>
     </modules>
 
 </project>
