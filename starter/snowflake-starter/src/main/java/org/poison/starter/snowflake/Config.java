@@ -10,8 +10,7 @@ import org.springframework.context.annotation.Bean;
 @Slf4j
 public class Config {
 
-    private static final long DATACENTER_ID = 1;
-    private static final int MAX_WORKER_COUNT = 3;
+    private static final int MAX_WORKER_COUNT = 1024;
     private static final String REDIS_WORK_ID_KEY = "worker-id-key";
     private final long workerId;
 
@@ -24,8 +23,8 @@ public class Config {
      */
     @Bean
     IdWorker idWorker() {
-        log.info("init idWorker, workerId:" + workerId + ", datacenterId:" + DATACENTER_ID);
-        return new IdWorker(workerId, DATACENTER_ID);
+        log.info("init idWorker, workerId:" + workerId);
+        return new IdWorker(workerId);
     }
 
     /**
