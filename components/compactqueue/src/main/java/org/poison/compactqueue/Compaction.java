@@ -1,5 +1,7 @@
 package org.poison.compactqueue;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Resource;
 import org.redisson.api.RQueue;
 import org.redisson.api.RSet;
 import org.redisson.api.RedissonClient;
@@ -7,8 +9,6 @@ import org.redisson.api.RedissonClient;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 
 /**
  * 重写"任务名",取任务窗口数量","取任务线程池数量"三个方法
@@ -56,8 +56,8 @@ public abstract class Compaction<T extends BaseTask> {
     }
 
     public void add(T t) {
-        queue.add(t);
         uniqueKeySet.add(t.getUniqueKey());
+        queue.add(t);
     }
 
     /**

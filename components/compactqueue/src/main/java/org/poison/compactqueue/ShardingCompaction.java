@@ -1,5 +1,7 @@
 package org.poison.compactqueue;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.poison.starter.web.utils.ShardingUtils;
 import org.redisson.api.RQueue;
@@ -7,8 +9,7 @@ import org.redisson.api.RSet;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -89,8 +90,8 @@ public abstract class ShardingCompaction<T extends ShardingBaseTask> extends Com
      */
     @Override
     public void add(T t) {
-        getQueue(t.getShardingKey()).add(t);
         getUniqueKeySet(t.getShardingKey()).add(t.getUniqueKey());
+        getQueue(t.getShardingKey()).add(t);
     }
 
     /**

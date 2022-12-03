@@ -23,6 +23,11 @@
             <groupId>org.poison</groupId>
             <artifactId>snowflake-starter</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.poison</groupId>
+            <artifactId>compactqueue</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

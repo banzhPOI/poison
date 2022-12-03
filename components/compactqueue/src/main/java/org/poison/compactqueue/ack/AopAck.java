@@ -1,9 +1,8 @@
 package org.poison.compactqueue.ack;
 
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -11,7 +10,6 @@ import org.poison.compactqueue.BaseTask;
 import org.poison.compactqueue.Compaction;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 
 @Slf4j
 @Aspect
