@@ -7,6 +7,7 @@ import org.redisson.api.RSet;
 import org.redisson.api.RedissonClient;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
+import org.springframework.util.CollectionUtils;
 
 import java.time.Instant;
 import java.util.List;
@@ -88,10 +89,21 @@ public abstract class Compaction<T extends BaseTask> implements SchedulingConfig
     }
 
     /**
+     * 任务入队
+     */
+    public void add(List<T> list) {
+        list.forEach(this::add);
+    }
+
+    /**
      * 任务消费
      */
     private void consumeTask() {
-        handle(get());
+        List<T> list = get();
+        if (CollectionUtils.isEmpty(list)){
+            return;
+        }
+        handle(list);
     }
 
     /**

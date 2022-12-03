@@ -16,11 +16,6 @@ public class TaskQueue extends ShardingCompaction<Task> {
     }
 
     @Override
-    protected long getDelay() {
-        return 5000;
-    }
-
-    @Override
     public void handle(List<Task> taskList) {
         for (Task task : taskList) {
             log.info(task.getId());
