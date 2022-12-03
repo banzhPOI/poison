@@ -2,8 +2,8 @@ package org.poison.test.controller;
 
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.poison.test.compactqueue.TaskQueue;
 import org.poison.test.compactqueue.Task;
+import org.poison.test.compactqueue.TaskQueue;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -90,7 +90,7 @@ public abstract class Compaction<T extends BaseTask> implements SchedulingConfig
     /**
      * 任务消费
      */
-    protected void consumeTask() {
+    private void consumeTask() {
         handle(get());
     }
 
