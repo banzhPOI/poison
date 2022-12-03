@@ -8,20 +8,15 @@ import java.util.List;
 
 @Slf4j
 @Component
-public class Queue extends Compaction<Task> {
+public class TaskQueue extends Compaction<Task> {
+
     @Override
     protected String getTaskName() {
         return "TEST";
     }
 
     @Override
-    protected int getWindowNum() {
-        return 10;
-    }
-
-    @Override
-    public void handleTask() {
-        List<Task> taskList = get();
+    public void handle(List<Task> taskList) {
         for (Task task : taskList) {
             log.info(task.getId());
         }
