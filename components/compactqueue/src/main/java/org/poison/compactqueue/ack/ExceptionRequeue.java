@@ -9,12 +9,12 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface UseAck {
+public @interface ExceptionRequeue {
     /**
      * 
      * @return
      */
     String value() default "";
 
-    Class beanName();
+    Class queueClass();
 }

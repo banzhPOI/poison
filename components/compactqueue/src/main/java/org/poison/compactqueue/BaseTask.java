@@ -17,4 +17,8 @@ public abstract class BaseTask implements Serializable {
      */
     public abstract String getUniqueKey();
 
+    /**
+     * 重试次数(失败重新入队会用到)
+     */
+    public Integer retryTimes;
 }
