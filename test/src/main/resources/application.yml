@@ -1,5 +1,5 @@
 spring:
   data:
     redis:
-      host: 172.30.26.144
+      host: 172.25.13.133
       password: taobuchu0

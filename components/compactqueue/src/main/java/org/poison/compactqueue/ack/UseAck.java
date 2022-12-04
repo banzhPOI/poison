@@ -15,4 +15,6 @@ public @interface UseAck {
      * @return
      */
     String value() default "";
+
+    Class beanName();
 }
