@@ -23,12 +23,6 @@ public interface OrderOperateClient {
     void reject(OrderOperateRequest operateRequest);
 
     /**
-     * 订单变更
-     */
-    @PostMapping("update")
-    OrderDetailResponse update(OrderOperateRequest operateRequest);
-
-    /**
      * 订单取消
      */
     @PostMapping("cancel")

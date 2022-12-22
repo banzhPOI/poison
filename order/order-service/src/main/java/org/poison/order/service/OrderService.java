@@ -1,34 +1,25 @@
-package org.poison.order.client;
+package org.poison.order.service;
 
 import org.poison.common.page.PageResult;
 import org.poison.order.core.req.OrderCreateRequest;
 import org.poison.order.core.req.OrderSearchRequest;
 import org.poison.order.core.req.OrderUpdateRequest;
 import org.poison.order.core.resp.OrderDetailResponse;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("orders")
-@FeignClient(name = "order-service", contextId = "orders")
-public interface OrderClient {
+public interface OrderService {
 
     /**
      * 订单创建
      */
-    @PostMapping("create")
     OrderDetailResponse create(OrderCreateRequest createRequest);
 
     /**
      * 订单检索
      */
-    @PostMapping("search")
     PageResult<OrderDetailResponse> search(OrderSearchRequest searchRequest);
 
     /**
-     * 订单变更
+     * 订单更新
      */
-    @PostMapping("update")
     OrderDetailResponse update(OrderUpdateRequest updateRequest);
-
 }

@@ -18,6 +18,11 @@
             <artifactId>order-interface</artifactId>
             <version>${parent.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.poison</groupId>
+            <artifactId>snowflake-starter</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
