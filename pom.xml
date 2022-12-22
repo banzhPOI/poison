@@ -20,6 +20,7 @@
         <module>elasticsearch</module>
         <module>template</module>
         <module>test</module>
+        <module>order</module>
     </modules>
 
     <build>

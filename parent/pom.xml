@@ -24,6 +24,7 @@
         <redisson.version>3.18.1</redisson.version>
         <elasticsearch.version>7.16.2</elasticsearch.version>
         <jakarta.version>2.0.1</jakarta.version>
+        <openfeign.version>4.0.0</openfeign.version>
         <gitflow.version>1.19.0</gitflow.version>
     </properties>
 
@@ -33,6 +34,11 @@
             <dependency>
                 <groupId>org.poison</groupId>
                 <artifactId>web-starter</artifactId>
+                <version>${starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.poison</groupId>
+                <artifactId>cloud-starter</artifactId>
                 <version>${starter.version}</version>
             </dependency>
             <dependency>
@@ -77,6 +83,11 @@
                 <artifactId>jakarta.json-api</artifactId>
                 <version>${jakarta.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${openfeign.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -86,6 +97,9 @@
                 <groupId>com.amashchenko.maven.plugin</groupId>
                 <artifactId>gitflow-maven-plugin</artifactId>
                 <version>${gitflow.version}</version>
+                <configuration>
+                    <skipTestProject>true</skipTestProject>
+                </configuration>
             </plugin>
         </plugins>
     </build>
