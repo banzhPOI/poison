@@ -9,8 +9,10 @@ import org.poison.order.core.req.OrderUpdateRequest;
 import org.poison.order.core.resp.OrderDetailResponse;
 import org.poison.order.dao.OrderDao;
 import org.poison.order.event.order.OrderCancel;
+import org.poison.order.event.order.OrderPass;
 import org.poison.order.event.order.OrderRollBack;
 import org.poison.order.eventRequest.OrderCancelEventRequest;
+import org.poison.order.eventRequest.OrderPassEventRequest;
 import org.poison.order.eventRequest.OrderRollBackEventRequest;
 import org.poison.order.pojo.dto.OrderDTO;
 import org.poison.order.service.OrderOperateService;
@@ -37,12 +39,15 @@ public class OrderOperateServiceImpl implements OrderOperateService {
     @Resource
     private OrderRollBack orderRollBack;
 
+    @Resource
+    private OrderPass orderPass;
+
     /**
      * 订单审核通过
      */
     @Override
     public void pass(OrderOperateRequest operateRequest) {
-
+        orderPass.fireEvent(OrderPassEventRequest.fromOperateRequest(operateRequest));
     }
 
     /**
