@@ -7,7 +7,6 @@ import org.poison.order.core.enums.BaseStatus;
 import org.poison.order.pojo.BasePojo.*;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
