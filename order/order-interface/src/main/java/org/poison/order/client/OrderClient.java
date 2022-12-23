@@ -7,6 +7,7 @@ import org.poison.order.core.req.OrderUpdateRequest;
 import org.poison.order.core.resp.OrderDetailResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("orders")
@@ -17,18 +18,18 @@ public interface OrderClient {
      * 订单创建
      */
     @PostMapping("create")
-    OrderDetailResponse create(OrderCreateRequest createRequest);
+    OrderDetailResponse create(@RequestBody OrderCreateRequest createRequest);
 
     /**
      * 订单检索
      */
     @PostMapping("search")
-    PageResult<OrderDetailResponse> search(OrderSearchRequest searchRequest);
+    PageResult<OrderDetailResponse> search(@RequestBody OrderSearchRequest searchRequest);
 
     /**
      * 订单变更
      */
     @PostMapping("update")
-    OrderDetailResponse update(OrderUpdateRequest updateRequest);
+    OrderDetailResponse update(@RequestBody OrderUpdateRequest updateRequest);
 
 }

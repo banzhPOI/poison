@@ -52,6 +52,7 @@ public class Order {
         Order order = new Order();
         order.setId("O" + IdUtils.get());
         order.setOrderNo("ORDER" + IdUtils.get());
+        order.setStatus(OrderStatus.CREATE);
         order.setOperatorId(request.getOperatorId());
         order.setOperatorName(request.getOperatorName());
         return order;

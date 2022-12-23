@@ -27,6 +27,8 @@
         <module>web-starter</module>
         <module>elasticsearch-starter</module>
         <module>snowflake-starter</module>
+        <module>cloud-starter</module>
+        <module>mybatis-starter</module>
     </modules>
 
 </project>

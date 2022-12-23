@@ -26,6 +26,7 @@
         <jakarta.version>2.0.1</jakarta.version>
         <openfeign.version>4.0.0</openfeign.version>
         <gitflow.version>1.19.0</gitflow.version>
+        <mybatis.version>3.0.1</mybatis.version>
     </properties>
 
     <dependencyManagement>
@@ -39,6 +40,11 @@
             <dependency>
                 <groupId>org.poison</groupId>
                 <artifactId>cloud-starter</artifactId>
+                <version>${starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.poison</groupId>
+                <artifactId>mybatis-starter</artifactId>
                 <version>${starter.version}</version>
             </dependency>
             <dependency>
@@ -87,6 +93,11 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-openfeign</artifactId>
                 <version>${openfeign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
