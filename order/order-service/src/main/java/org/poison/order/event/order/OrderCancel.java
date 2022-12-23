@@ -1,11 +1,13 @@
 package org.poison.order.event.order;
 
+import jakarta.annotation.Resource;
+import org.poison.order.action.InfoAdmin;
+import org.poison.order.action.RecordLog;
 import org.poison.order.core.enums.BaseStatus;
 import org.poison.order.core.enums.OrderStatus;
 import org.poison.order.pojo.BasePojo.BaseAction;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -14,6 +16,14 @@ import java.util.List;
 
 @Component
 public class OrderCancel extends BaseOrderEvent {
+
+
+    @Resource
+    private RecordLog recordLog;
+
+    @Resource
+    private InfoAdmin infoAdmin;
+
 
     /**
      * 需要重写这个方法
@@ -39,7 +49,7 @@ public class OrderCancel extends BaseOrderEvent {
      */
     @Override
     protected List<BaseAction> getActionList() {
-        return Collections.emptyList();
+        return List.of(recordLog, infoAdmin);
     }
 
 }
