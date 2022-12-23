@@ -7,11 +7,14 @@ import org.poison.order.core.enums.BaseStatus;
 import org.poison.order.pojo.BasePojo.*;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
+@Component
 public abstract class BaseEvent {
 
     /**
@@ -59,8 +62,6 @@ public abstract class BaseEvent {
         }
     }
 
-    @Resource
-    private RedissonClient redisson;
 
     /**
      * 事件触发
@@ -103,4 +104,12 @@ public abstract class BaseEvent {
             }
         }
     }
+
+    public RedissonClient redisson;
+
+    @Autowired
+    public final void setRedisson(RedissonClient redisson) {
+        this.redisson = redisson;
+    }
+
 }

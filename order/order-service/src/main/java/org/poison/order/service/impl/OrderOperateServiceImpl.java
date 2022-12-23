@@ -1,5 +1,6 @@
 package org.poison.order.service.impl;
 
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.poison.order.core.req.OrderOperateRequest;
 import org.poison.order.event.order.OrderCancel;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderOperateServiceImpl implements OrderOperateService {
 
+    @Resource
+    private OrderCancel orderCancel;
     /**
      * 订单审核通过
      */
@@ -36,7 +39,6 @@ public class OrderOperateServiceImpl implements OrderOperateService {
      */
     @Override
     public void cancel(OrderOperateRequest operateRequest) {
-        OrderCancel orderCancel = new OrderCancel();
         orderCancel.fireEvent(OrderCancelEventRequest.fromOperateRequest(operateRequest));
     }
 }

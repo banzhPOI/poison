@@ -1,16 +1,18 @@
 package org.poison.order.event.order;
 
-import lombok.Data;
 import org.poison.order.core.enums.BaseStatus;
 import org.poison.order.core.enums.OrderStatus;
 import org.poison.order.pojo.BasePojo.BaseAction;
+import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
  * 订单取消事件
  */
-@Data
+
+@Component
 public class OrderCancel extends BaseOrderEvent {
 
     /**
@@ -37,7 +39,7 @@ public class OrderCancel extends BaseOrderEvent {
      */
     @Override
     protected List<BaseAction> getActionList() {
-        return null;
+        return Collections.emptyList();
     }
 
 }

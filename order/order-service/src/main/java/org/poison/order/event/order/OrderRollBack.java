@@ -4,13 +4,14 @@ import lombok.Data;
 import org.poison.order.core.enums.BaseStatus;
 import org.poison.order.core.enums.OrderStatus;
 import org.poison.order.pojo.BasePojo.BaseAction;
+import org.redisson.api.RedissonClient;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
  * 订单回滚事件
  */
-@Data
 public class OrderRollBack extends BaseOrderEvent {
 
     /**
@@ -37,7 +38,7 @@ public class OrderRollBack extends BaseOrderEvent {
      */
     @Override
     protected List<BaseAction> getActionList() {
-        return null;
+        return Collections.emptyList();
     }
 
 }

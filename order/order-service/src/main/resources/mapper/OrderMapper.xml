@@ -25,4 +25,17 @@
         INSERT INTO jidu_odin.bzh_order (<include refid="allColumns"/>)
     VALUES (#{id}, #{orderNo}, #{status}, now(3), now(3), #{operatorId}, #{operatorName})
     </insert>
+
+    <select id="findById" resultMap="orderMap">
+        SELECT
+        <include refid="allColumns" />
+        FROM jidu_odin.bzh_order
+        WHERE id = #{id}
+    </select>
+
+    <update id="updateStatusById">
+        UPDATE jidu_odin.bzh_order
+        SET `status` = #{status}
+        WHERE id = #{id}
+    </update>
 </mapper>

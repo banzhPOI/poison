@@ -1,10 +1,17 @@
 package org.poison.order.event.order;
 
+import jakarta.annotation.Resource;
 import org.poison.order.core.enums.BaseStatus;
 import org.poison.order.event.BaseEvent;
-import org.poison.order.pojo.BasePojo.BaseDocDTO;
+import org.poison.order.mapper.OrderMapper;
+import org.poison.order.pojo.dto.OrderDTO;
+import org.springframework.stereotype.Component;
 
-public abstract class BaseOrderEvent  extends BaseEvent {
+@Component
+public abstract class BaseOrderEvent extends BaseEvent {
+
+    @Resource
+    private OrderMapper orderMapper;
 
     /**
      * 需要重写这个方法
@@ -22,8 +29,8 @@ public abstract class BaseOrderEvent  extends BaseEvent {
      * @param docId
      */
     @Override
-    protected BaseDocDTO getDocById(String docId) {
-        return null;
+    protected OrderDTO getDocById(String docId) {
+        return OrderDTO.fromEntity(orderMapper.findById(docId));
     }
 
     /**
@@ -35,6 +42,6 @@ public abstract class BaseOrderEvent  extends BaseEvent {
      */
     @Override
     protected void updateStatus(String docId, BaseStatus status) {
-
+        orderMapper.updateStatusById(docId, status);
     }
 }
