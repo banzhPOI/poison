@@ -1,6 +1,5 @@
 package org.poison.order.event;
 
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.poison.common.exception.BizException;
 import org.poison.order.core.enums.BaseStatus;
@@ -85,14 +84,14 @@ public abstract class BaseEvent {
             // 校验状态
             checkFromStatus(docDTO.getStatus());
             // 执行动作
-            for (BaseAction baseAction : getActionList()) {
+            getActionList().forEach(baseAction -> {
                 // 区分执行有参动作和无参动作
                 if (baseAction instanceof BaseNonParamAction nonParamAction) {
                     nonParamAction.doAction(docDTO);
                 } else if (baseAction instanceof BaseParamAction paramAction) {
                     paramAction.doAction(docDTO, req);
                 }
-            }
+            });
             // 变更状态
             updateStatus(req.getDocId(), getToStatus());
         } catch (Exception e) {
