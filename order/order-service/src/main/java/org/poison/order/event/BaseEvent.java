@@ -7,6 +7,7 @@ import org.poison.order.core.enums.BaseStatus;
 import org.poison.order.pojo.BasePojo.*;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -64,6 +65,8 @@ public abstract class BaseEvent {
 
     /**
      * 事件触发
+     * 加锁保证一张单据同一时间只能触发一个事件
+     * 这里没有用@Transactional 因为状态是最后更新的，更新状态代表动作都执行成功了
      * 0.加锁
      * 1.获取单据
      * 2.校验状态
@@ -72,7 +75,6 @@ public abstract class BaseEvent {
      */
     public void fireEvent(BaseEventRequest req) {
         RLock lock = redisson.getLock(getDocPrefix() + req.getDocId());
-
         try {
             lock.tryLock(10, 5, TimeUnit.SECONDS);
             // 获取单据

@@ -6,10 +6,16 @@ import org.poison.order.core.req.OrderCreateRequest;
 import org.poison.order.core.req.OrderOperateRequest;
 import org.poison.order.core.req.OrderSearchRequest;
 import org.poison.order.core.resp.OrderDetailResponse;
+import org.poison.order.event.OrderCancel;
+import org.poison.order.eventRequest.OrderCancelEventRequest;
 import org.poison.order.service.OrderOperateService;
 import org.poison.order.service.OrderService;
 import org.springframework.stereotype.Service;
 
+/**
+ * 设计思路
+ * 单据的能力是由事件支撑的，所以这里提供的能力是各种事件的组合
+ */
 @Slf4j
 @Service
 public class OrderOperateServiceImpl implements OrderOperateService {
@@ -35,8 +41,7 @@ public class OrderOperateServiceImpl implements OrderOperateService {
      */
     @Override
     public void cancel(OrderOperateRequest operateRequest) {
-        // 加锁
-        // 查询并校验状态
-        // 执行动作
+        OrderCancel orderCancel = new OrderCancel();
+        orderCancel.fireEvent(OrderCancelEventRequest.fromOperateRequest(operateRequest));
     }
 }
