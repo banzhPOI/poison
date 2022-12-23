@@ -35,7 +35,16 @@
 
     <update id="updateStatusById">
         UPDATE jidu_odin.bzh_order
-        SET `status` = #{status}
+        SET `status` = #{status},
+        update_time = now(3)
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateOrder">
+        UPDATE jidu_odin.bzh_order
+        SET operator_id = #{operatorId},
+        operator_name = #{operatorName},
+        update_time = now(3)
         WHERE id = #{id}
     </update>
 </mapper>

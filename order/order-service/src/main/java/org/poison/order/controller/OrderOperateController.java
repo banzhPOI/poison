@@ -4,6 +4,7 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.poison.order.client.OrderOperateClient;
 import org.poison.order.core.req.OrderOperateRequest;
+import org.poison.order.core.req.OrderUpdateRequest;
 import org.poison.order.core.resp.OrderDetailResponse;
 import org.poison.order.service.OrderOperateService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,5 +41,13 @@ public class OrderOperateController implements OrderOperateClient {
     @Override
     public void cancel(OrderOperateRequest operateRequest) {
         orderOperateService.cancel(operateRequest);
+    }
+
+    /**
+     * 订单变更
+     */
+    @Override
+    public OrderDetailResponse update(OrderUpdateRequest updateRequest) {
+        return orderOperateService.update(updateRequest);
     }
 }

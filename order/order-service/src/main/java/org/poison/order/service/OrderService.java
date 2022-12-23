@@ -3,7 +3,6 @@ package org.poison.order.service;
 import org.poison.common.page.PageResult;
 import org.poison.order.core.req.OrderCreateRequest;
 import org.poison.order.core.req.OrderSearchRequest;
-import org.poison.order.core.req.OrderUpdateRequest;
 import org.poison.order.core.resp.OrderDetailResponse;
 
 public interface OrderService {
@@ -18,8 +17,4 @@ public interface OrderService {
      */
     PageResult<OrderDetailResponse> search(OrderSearchRequest searchRequest);
 
-    /**
-     * 订单更新
-     */
-    OrderDetailResponse update(OrderUpdateRequest updateRequest);
 }

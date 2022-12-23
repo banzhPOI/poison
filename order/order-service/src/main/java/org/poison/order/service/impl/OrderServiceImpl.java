@@ -5,9 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.poison.common.page.PageResult;
 import org.poison.order.core.req.OrderCreateRequest;
 import org.poison.order.core.req.OrderSearchRequest;
-import org.poison.order.core.req.OrderUpdateRequest;
 import org.poison.order.core.resp.OrderDetailResponse;
-import org.poison.order.mapper.OrderMapper;
+import org.poison.order.dao.OrderDao;
 import org.poison.order.pojo.entity.Order;
 import org.poison.order.service.OrderService;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class OrderServiceImpl implements OrderService {
 
     @Resource
-    private OrderMapper orderMapper;
+    private OrderDao orderDao;
 
     /**
      * 订单创建
@@ -25,7 +24,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDetailResponse create(OrderCreateRequest createRequest) {
         Order order = Order.fromCreateRequest(createRequest);
-        orderMapper.addOrder(order);
+        orderDao.addOrder(order);
         return null;
     }
 
@@ -37,11 +36,5 @@ public class OrderServiceImpl implements OrderService {
         return null;
     }
 
-    /**
-     * 订单更新
-     */
-    @Override
-    public OrderDetailResponse update(OrderUpdateRequest updateRequest) {
-        return null;
-    }
+
 }

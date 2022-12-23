@@ -1,10 +1,9 @@
 package org.poison.order.event.order;
 
-import lombok.Data;
 import org.poison.order.core.enums.BaseStatus;
 import org.poison.order.core.enums.OrderStatus;
 import org.poison.order.pojo.BasePojo.BaseAction;
-import org.redisson.api.RedissonClient;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,6 +11,7 @@ import java.util.List;
 /**
  * 订单回滚事件
  */
+@Component
 public class OrderRollBack extends BaseOrderEvent {
 
     /**

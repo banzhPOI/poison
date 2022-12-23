@@ -2,8 +2,8 @@ package org.poison.order.event.order;
 
 import jakarta.annotation.Resource;
 import org.poison.order.core.enums.BaseStatus;
+import org.poison.order.dao.OrderDao;
 import org.poison.order.event.BaseEvent;
-import org.poison.order.mapper.OrderMapper;
 import org.poison.order.pojo.dto.OrderDTO;
 import org.springframework.stereotype.Component;
 
@@ -11,15 +11,17 @@ import org.springframework.stereotype.Component;
 public abstract class BaseOrderEvent extends BaseEvent {
 
     @Resource
-    private OrderMapper orderMapper;
+    private OrderDao orderDao;
+
+    public static final String DOC_PREFIX = "ORDER";
 
     /**
      * 需要重写这个方法
      * 单据前缀（加锁用）
      */
     @Override
-    protected String getDocPrefix() {
-        return "ORDER";
+    public String getDocPrefix() {
+        return DOC_PREFIX;
     }
 
     /**
@@ -30,7 +32,7 @@ public abstract class BaseOrderEvent extends BaseEvent {
      */
     @Override
     protected OrderDTO getDocById(String docId) {
-        return OrderDTO.fromEntity(orderMapper.findById(docId));
+        return orderDao.findById(docId);
     }
 
     /**
@@ -42,6 +44,6 @@ public abstract class BaseOrderEvent extends BaseEvent {
      */
     @Override
     protected void updateStatus(String docId, BaseStatus status) {
-        orderMapper.updateStatusById(docId, status);
+        orderDao.updateStatusById(docId, status);
     }
 }

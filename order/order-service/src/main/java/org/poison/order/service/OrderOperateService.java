@@ -1,6 +1,8 @@
 package org.poison.order.service;
 
 import org.poison.order.core.req.OrderOperateRequest;
+import org.poison.order.core.req.OrderUpdateRequest;
+import org.poison.order.core.resp.OrderDetailResponse;
 
 public interface OrderOperateService {
 
@@ -19,4 +21,9 @@ public interface OrderOperateService {
      * 订单取消
      */
     void cancel(OrderOperateRequest operateRequest);
+
+    /**
+     * 订单更新
+     */
+    OrderDetailResponse update(OrderUpdateRequest updateRequest);
 }

@@ -22,4 +22,9 @@ public interface OrderMapper {
      * 根据主键更新状态
      */
     void updateStatusById(@Param("id") String id, @Param("status") BaseStatus status);
+
+    /**
+     * 更新订单
+     */
+    void updateOrder(Order order);
 }

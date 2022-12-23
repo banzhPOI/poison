@@ -3,7 +3,6 @@ package org.poison.order.client;
 import org.poison.common.page.PageResult;
 import org.poison.order.core.req.OrderCreateRequest;
 import org.poison.order.core.req.OrderSearchRequest;
-import org.poison.order.core.req.OrderUpdateRequest;
 import org.poison.order.core.resp.OrderDetailResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,11 +24,4 @@ public interface OrderClient {
      */
     @PostMapping("search")
     PageResult<OrderDetailResponse> search(@RequestBody OrderSearchRequest searchRequest);
-
-    /**
-     * 订单变更
-     */
-    @PostMapping("update")
-    OrderDetailResponse update(@RequestBody OrderUpdateRequest updateRequest);
-
 }

@@ -1,6 +1,7 @@
 package org.poison.order.client;
 
 import org.poison.order.core.req.OrderOperateRequest;
+import org.poison.order.core.req.OrderUpdateRequest;
 import org.poison.order.core.resp.OrderDetailResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,4 +29,10 @@ public interface OrderOperateClient {
      */
     @PostMapping("cancel")
     void cancel(@RequestBody OrderOperateRequest operateRequest);
+
+    /**
+     * 订单变更
+     */
+    @PostMapping("update")
+    OrderDetailResponse update(@RequestBody OrderUpdateRequest updateRequest);
 }
