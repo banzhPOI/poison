@@ -35,6 +35,8 @@ public class OrderOperateServiceImpl implements OrderOperateService {
      */
     @Override
     public void cancel(OrderOperateRequest operateRequest) {
-
+        // 加锁
+        // 查询并校验状态
+        // 执行动作
     }
 }
