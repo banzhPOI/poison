@@ -95,7 +95,7 @@ public abstract class BaseEvent {
             // 变更状态
             updateStatus(req.getDocId(), getToStatus());
         } catch (Exception e) {
-            log.error("lock doc: {} failed", req.getDocId(), e);
+            log.error("lock doc: {} failed: {}", req.getDocId(), e.getMessage());
         } finally {
             //解锁
             if (lock.isLocked() && lock.isHeldByCurrentThread()) {

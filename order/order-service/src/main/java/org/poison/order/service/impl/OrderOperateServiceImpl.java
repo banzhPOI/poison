@@ -83,7 +83,7 @@ public class OrderOperateServiceImpl implements OrderOperateService {
             }
             orderDao.updateOrder(req,orderDTO);
         } catch (Exception e) {
-            log.error("lock doc: {} failed", req.getId(), e);
+            log.error("lock doc: {} failed: {}", req.getId(), e.getMessage());
         } finally {
             //解锁
             if (lock.isLocked() && lock.isHeldByCurrentThread()) {

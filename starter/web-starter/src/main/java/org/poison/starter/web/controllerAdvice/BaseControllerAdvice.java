@@ -21,21 +21,21 @@ public class BaseControllerAdvice {
     private ObjectMapper objectMapper;
 
     @ExceptionHandler({BaseException.class})
-    public ResponseEntity<String> handleBaseException(BaseException ex) throws JsonProcessingException {
+    public ResponseEntity<String> handleBaseException(BaseException e) throws JsonProcessingException {
         HttpStatus httpStatus;
-        if (ex instanceof SysException) {
-            log.error("BaseControllerAdvice handleBaseException with error:", ex);
+        if (e instanceof SysException) {
+            log.error("BaseControllerAdvice handleBaseException with error:", e);
             httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
         } else {
-            log.warn("BaseControllerAdvice handleBaseException with info: " + ex.getMessage());
+            log.warn("BaseControllerAdvice handleBaseException with info: " + e.getMessage());
             httpStatus = HttpStatus.BAD_REQUEST;
         }
-        return new ResponseEntity<>(objectMapper.writeValueAsString(ex), httpStatus);
+        return new ResponseEntity<>(objectMapper.writeValueAsString(e), httpStatus);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handlerException(Exception ex) throws JsonProcessingException {
-        log.error("BaseControllerAdvice handleException with error:", ex);
-        return new ResponseEntity<>(objectMapper.writeValueAsString(ex), HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<String> handlerException(Exception e) throws JsonProcessingException {
+        log.error("BaseControllerAdvice handleException with error:", e);
+        return new ResponseEntity<>(objectMapper.writeValueAsString(e), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
