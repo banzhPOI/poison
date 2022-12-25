@@ -1,7 +1,7 @@
 spring:
   cloud:
     consul:
-      host: http://consul.jidudev.com
+      host:
       port: 80
       discovery:
         instance-id: ${spring.application.name}
