@@ -1,10 +1,5 @@
 package org.poison.common.exception;
 
-/**
- * BizException is known Exception, no need retry
- *
- * @author Frank Zhang
- */
 public class BizException extends BaseException {
 
     private static final long serialVersionUID = 1L;
