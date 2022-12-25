@@ -21,6 +21,8 @@
         <common.version>0.0.1-SNAPSHOT</common.version>
         <compactqueue.version>0.0.1-SNAPSHOT</compactqueue.version>
 
+        <order.version>0.0.1-SNAPSHOT</order.version>
+
         <redisson.version>3.18.1</redisson.version>
         <elasticsearch.version>7.16.2</elasticsearch.version>
         <jakarta.version>2.0.1</jakarta.version>
@@ -59,7 +61,6 @@
             </dependency>
 
             <!--common-->
-
             <dependency>
                 <groupId>org.poison</groupId>
                 <artifactId>common</artifactId>
@@ -98,6 +99,13 @@
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis.version}</version>
+            </dependency>
+
+            <!--service-->
+            <dependency>
+                <groupId>org.poison</groupId>
+                <artifactId>order-interface</artifactId>
+                <version>${order.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,17 +1,15 @@
-package org.poison.order;
+package org.poison.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.scheduling.annotation.EnableAsync;
 
-@EnableAsync
 @EnableFeignClients(basePackages = "org.poison.**.client")
 @SpringBootApplication
-public class OrderApplication {
+public class WebApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(OrderApplication.class, args);
+        SpringApplication.run(WebApplication.class, args);
     }
 
 }
