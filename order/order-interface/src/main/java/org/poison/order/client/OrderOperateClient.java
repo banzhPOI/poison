@@ -31,6 +31,6 @@ public interface OrderOperateClient {
     /**
      * 订单变更
      */
-    @PostMapping("update")
+    @PostMapping("orders/operate/update")
     OrderDetailResponse update(@RequestBody OrderUpdateRequest updateRequest);
 }
