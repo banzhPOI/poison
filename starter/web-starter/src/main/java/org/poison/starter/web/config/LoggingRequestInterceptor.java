@@ -17,7 +17,6 @@ import java.util.Map;
 public class LoggingRequestInterceptor implements HandlerInterceptor {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
-    @Resource
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
