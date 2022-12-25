@@ -1,0 +1,3 @@
+org.poison.starter.cloud.errorDecoder.FeignErrorDecoder
+org.poison.starter.cloud.controllerAdvice.FeignControllerAdvice
+org.poison.starter.cloud.controllerAdvice.WebControllerAdvice

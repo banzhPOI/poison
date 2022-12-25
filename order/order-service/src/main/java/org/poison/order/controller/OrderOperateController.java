@@ -2,6 +2,7 @@ package org.poison.order.controller;
 
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.poison.common.exception.BizException;
 import org.poison.order.client.OrderOperateClient;
 import org.poison.order.core.req.OrderOperateRequest;
 import org.poison.order.core.req.OrderUpdateRequest;
@@ -22,6 +23,7 @@ public class OrderOperateController implements OrderOperateClient {
     @Override
     public void pass(OrderOperateRequest operateRequest) {
         orderOperateService.pass(operateRequest);
+        throw new BizException("test");
     }
 
     /**
