@@ -4,8 +4,13 @@ import jakarta.annotation.Resource;
 import org.poison.order.core.enums.BaseStatus;
 import org.poison.order.dao.OrderDao;
 import org.poison.order.event.BaseEvent;
+import org.poison.order.pojo.BasePojo.BaseAction;
+import org.poison.order.pojo.BasePojo.BaseDocDTO;
 import org.poison.order.pojo.dto.OrderDTO;
 import org.springframework.stereotype.Component;
+
+import java.util.Collections;
+import java.util.List;
 
 @Component
 public abstract class BaseOrderEvent extends BaseEvent {
@@ -45,5 +50,24 @@ public abstract class BaseOrderEvent extends BaseEvent {
     @Override
     protected void updateStatus(String docId, BaseStatus status) {
         orderDao.updateStatusById(docId, status);
+    }
+
+    /**
+     * 需要重写这个方法
+     * 这里提供默认判断，给不需要判断的场景用
+     */
+    @Override
+    protected void checkCondition(BaseDocDTO docDTO) {
+    }
+
+
+    /**
+     * 需要重写这个方法
+     * 事件触发要执行的动作列表
+     * 这里提供默认动作，给不需要执行动作的场景用
+     */
+    @Override
+    protected List<BaseAction> getActionList() {
+        return Collections.emptyList();
     }
 }

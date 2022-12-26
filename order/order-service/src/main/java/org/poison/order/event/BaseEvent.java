@@ -36,6 +36,12 @@ public abstract class BaseEvent {
 
     /**
      * 需要重写这个方法
+     * 条件判断throw异常中断流程
+     */
+    protected abstract void checkCondition(BaseDocDTO docDTO);
+
+    /**
+     * 需要重写这个方法
      * 事件触发要执行的动作列表
      */
     protected abstract List<BaseAction> getActionList();
@@ -83,6 +89,8 @@ public abstract class BaseEvent {
             }
             // 校验状态
             checkFromStatus(docDTO.getStatus());
+            // 增加condition
+            checkCondition(docDTO);
             // 执行动作
             getActionList().forEach(baseAction -> {
                 // 区分执行有参动作和无参动作

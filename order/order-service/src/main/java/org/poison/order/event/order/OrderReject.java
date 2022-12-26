@@ -9,10 +9,12 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 订单回滚事件
+ * 订单取消事件
  */
+
 @Component
-public class OrderRollBack extends BaseOrderEvent {
+public class OrderReject extends BaseOrderEvent {
+
 
     /**
      * 需要重写这个方法
@@ -20,7 +22,7 @@ public class OrderRollBack extends BaseOrderEvent {
      */
     @Override
     protected List<BaseStatus> getFromStatusList() {
-        return List.of(OrderStatus.PASS, OrderStatus.REJECT);
+        return List.of(OrderStatus.CREATE);
     }
 
     /**
@@ -29,7 +31,6 @@ public class OrderRollBack extends BaseOrderEvent {
      */
     @Override
     protected BaseStatus getToStatus() {
-        return OrderStatus.CREATE;
+        return OrderStatus.REJECT;
     }
-
 }

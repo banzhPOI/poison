@@ -6,6 +6,7 @@ import org.poison.order.action.RecordLog;
 import org.poison.order.core.enums.BaseStatus;
 import org.poison.order.core.enums.OrderStatus;
 import org.poison.order.pojo.BasePojo.BaseAction;
+import org.poison.order.pojo.BasePojo.BaseDocDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -42,6 +43,7 @@ public class OrderCancel extends BaseOrderEvent {
     protected BaseStatus getToStatus() {
         return OrderStatus.CANCEL;
     }
+
 
     /**
      * 需要重写这个方法

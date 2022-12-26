@@ -33,14 +33,4 @@ public class OrderPass extends BaseOrderEvent {
     protected BaseStatus getToStatus() {
         return OrderStatus.PASS;
     }
-
-    /**
-     * 需要重写这个方法
-     * 事件触发要执行的动作列表
-     */
-    @Override
-    protected List<BaseAction> getActionList() {
-        return Collections.emptyList();
-    }
-
 }
