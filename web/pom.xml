@@ -19,7 +19,6 @@
             <artifactId>cloud-starter</artifactId>
             <optional>true</optional>
         </dependency>
-
         <dependency>
             <groupId>org.poison</groupId>
             <artifactId>order-interface</artifactId>

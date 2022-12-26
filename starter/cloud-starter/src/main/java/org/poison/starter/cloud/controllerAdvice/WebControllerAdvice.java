@@ -5,8 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.poison.common.exception.BaseException;
 import org.poison.common.exception.SysException;
 import org.poison.common.response.Response;
-import org.poison.starter.cloud.enableAnnotations.WebCloud;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @Slf4j
 @ControllerAdvice
-@ConditionalOnBean(WebCloud.class)
 public class WebControllerAdvice {
 
     @ExceptionHandler({BaseException.class})

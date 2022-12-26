@@ -7,8 +7,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.poison.common.exception.BaseException;
 import org.poison.common.exception.SysException;
-import org.poison.starter.cloud.enableAnnotations.FeignCloud;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @Slf4j
 @ControllerAdvice
-@ConditionalOnBean(FeignCloud.class)
 public class FeignControllerAdvice {
 
     ObjectMapper objectMapperWithType = new ObjectMapper()
