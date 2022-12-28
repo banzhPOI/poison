@@ -19,9 +19,11 @@
         <module>components</module>
         <module>elasticsearch</module>
         <module>template</module>
+        <module>cloud-template</module>
         <module>test</module>
         <module>web</module>
         <module>order</module>
+        <module>flow</module>
     </modules>
 
     <build>
