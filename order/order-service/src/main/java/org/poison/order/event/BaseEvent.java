@@ -112,7 +112,7 @@ public abstract class BaseEvent {
         }
     }
 
-    public RedissonClient redisson;
+    protected RedissonClient redisson;
 
     @Autowired
     public final void setRedisson(RedissonClient redisson) {
