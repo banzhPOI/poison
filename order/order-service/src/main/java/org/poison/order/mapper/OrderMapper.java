@@ -24,7 +24,14 @@ public interface OrderMapper {
     void updateStatusById(@Param("id") String id, @Param("status") BaseStatus status);
 
     /**
+     * 根据主键更新失败原因
+     */
+    void updateFailReasonById(@Param("id") String id,@Param("failReason") String failReason);
+
+
+    /**
      * 更新订单
      */
     void updateOrder(Order order);
+
 }

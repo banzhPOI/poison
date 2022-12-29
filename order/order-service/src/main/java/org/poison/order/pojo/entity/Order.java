@@ -48,6 +48,11 @@ public class Order {
      */
     private String operatorName;
 
+    /**
+     * 失败原因
+     */
+    private String failReason;
+
     public static Order fromCreateRequest(OrderCreateRequest request) {
         if (request == null) {
             return null;

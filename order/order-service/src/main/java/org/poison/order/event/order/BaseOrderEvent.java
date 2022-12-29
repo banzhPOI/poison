@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import java.util.Collections;
 import java.util.List;
 
-@Component
 public abstract class BaseOrderEvent extends BaseEvent {
 
     @Resource
@@ -43,13 +42,19 @@ public abstract class BaseOrderEvent extends BaseEvent {
     /**
      * 需要重写这个方法
      * 更新单据目标状态
-     *
-     * @param docId
-     * @param status
      */
     @Override
     protected void updateStatus(String docId, BaseStatus status) {
         orderDao.updateStatusById(docId, status);
+    }
+
+    /**
+     * 需要重写这个方法
+     * 在fireEvent失败的时候记录失败原因
+     */
+    @Override
+    protected void updateFailReason(String docId, String failReason) {
+        orderDao.updateFailReason(docId, failReason);
     }
 
     /**

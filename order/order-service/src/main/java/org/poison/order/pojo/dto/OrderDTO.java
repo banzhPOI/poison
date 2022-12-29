@@ -45,6 +45,11 @@ public class OrderDTO extends BaseDocDTO {
      */
     private String operatorName;
 
+    /**
+     * 失败原因
+     */
+    private String failReason;
+
     public static OrderDTO fromEntity(Order entity){
         if (entity==null){
             return null;
@@ -57,6 +62,7 @@ public class OrderDTO extends BaseDocDTO {
         dto.setUpdateTime(entity.getCreateTime());
         dto.setOperatorId(entity.getOperatorId());
         dto.setOperatorName(entity.getOperatorName());
+        dto.setFailReason(entity.getFailReason());
         return dto;
     }
 }

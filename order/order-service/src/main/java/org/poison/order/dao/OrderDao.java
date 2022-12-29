@@ -36,6 +36,12 @@ public class OrderDao {
         orderMapper.updateStatusById(docId, status);
     }
 
+    /**
+     * 根据主键更新失败原因
+     */
+    public void updateFailReason(String docId, String failReason) {
+        orderMapper.updateFailReasonById(docId, failReason);
+    }
 
     /**
      * 更新订单
