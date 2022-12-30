@@ -1,17 +1,17 @@
 package org.poison.order.pojo.entity;
 
 import lombok.Data;
-import org.aspectj.weaver.ast.Or;
 import org.poison.order.core.enums.OrderStatus;
 import org.poison.order.core.req.OrderCreateRequest;
 import org.poison.order.core.req.OrderUpdateRequest;
+import org.poison.order.pojo.BasePojo.BaseDocEntity;
 import org.poison.order.pojo.dto.OrderDTO;
 import org.poison.starter.snowflake.IdUtils;
 
 import java.time.Instant;
 
 @Data
-public class Order {
+public class Order extends BaseDocEntity {
 
     /**
      * 订单id
@@ -28,30 +28,6 @@ public class Order {
      */
     private OrderStatus status;
 
-    /**
-     * 创建时间
-     */
-    private Instant createTime;
-
-    /**
-     * 更新时间
-     */
-    private Instant updateTime;
-
-    /**
-     * 操作人id
-     */
-    private String operatorId;
-
-    /**
-     * 操作人名
-     */
-    private String operatorName;
-
-    /**
-     * 失败原因
-     */
-    private String failReason;
 
     public static Order fromCreateRequest(OrderCreateRequest request) {
         if (request == null) {

@@ -36,7 +36,14 @@
     <update id="updateStatusById">
         UPDATE jidu_odin.bzh_order
         SET `status` = #{status},
-        update_time = now(3)
+        update_time = NOW(3)
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateFailReasonById">
+        UPDATE jidu_odin.bzh_order
+        SET failReason = #{failReason},
+        update_time = NOW(3)
         WHERE id = #{id}
     </update>
 

@@ -18,13 +18,11 @@ import java.util.List;
 @Component
 public class OrderCancel extends BaseOrderEvent {
 
-
     @Resource
     private RecordLog recordLog;
 
     @Resource
     private InfoAdmin infoAdmin;
-
 
     /**
      * 需要重写这个方法

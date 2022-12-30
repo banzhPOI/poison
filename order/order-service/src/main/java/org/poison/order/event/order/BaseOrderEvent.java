@@ -65,7 +65,6 @@ public abstract class BaseOrderEvent extends BaseEvent {
     protected void checkCondition(BaseDocDTO docDTO) {
     }
 
-
     /**
      * 需要重写这个方法
      * 事件触发要执行的动作列表
