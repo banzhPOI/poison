@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.0</version>
+        <version>3.0.1</version>
         <relativePath/>
     </parent>
 
@@ -25,9 +25,8 @@
 
         <redisson.version>3.18.1</redisson.version>
         <elasticsearch.version>7.16.2</elasticsearch.version>
+        <cloud.version>2022.0.0</cloud.version>
         <jakarta.version>2.0.1</jakarta.version>
-        <openfeign.version>4.0.0</openfeign.version>
-        <consul.version>4.0.0</consul.version>
         <bootstrap.version>4.0.0</bootstrap.version>
         <gitflow.version>1.19.0</gitflow.version>
         <mybatis.version>3.0.1</mybatis.version>
@@ -35,6 +34,13 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <!--starter-->
             <dependency>
                 <groupId>org.poison</groupId>
@@ -92,16 +98,16 @@
                 <artifactId>jakarta.json-api</artifactId>
                 <version>${jakarta.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-openfeign</artifactId>
-                <version>${openfeign.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-consul-discovery</artifactId>
-                <version>${consul.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.cloud</groupId>-->
+<!--                <artifactId>spring-cloud-starter-openfeign</artifactId>-->
+<!--                <version>${openfeign.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.cloud</groupId>-->
+<!--                <artifactId>spring-cloud-starter-consul-discovery</artifactId>-->
+<!--                <version>${consul.version}</version>-->
+<!--            </dependency>-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-bootstrap</artifactId>
