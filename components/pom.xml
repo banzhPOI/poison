@@ -27,6 +27,7 @@
 
     <modules>
         <module>compactqueue</module>
+        <module>methodidempotent</module>
     </modules>
 
 </project>
