@@ -8,5 +8,5 @@ public class OrderOperateRequest extends BaseRequest{
     /**
      * 订单id
      */
-    String id;
+    private String id;
 }
