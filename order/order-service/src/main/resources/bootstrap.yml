@@ -4,3 +4,7 @@ server:
 spring:
   application:
     name: banzh-order-service
+  cloud:
+    nacos:
+      config:
+        file-extension: yml

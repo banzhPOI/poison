@@ -4,3 +4,7 @@ server:
 spring:
   application:
     name: banzh-web
+  cloud:
+    nacos:
+      config:
+        file-extension: yml

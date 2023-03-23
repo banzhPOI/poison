@@ -1,0 +1,7 @@
+
+  _____   _____  _____ _______  _____  __   _
+ |_____] |     |   |   |______ |     | | \  |
+ |       |_____| __|__ ______| |_____| |  \_|
+${AnsiColor.BRIGHT_RED}
+Application Name: ${spring.application.name}
+Spring Boot Version: ${spring-boot.version}${spring-boot.formatted-version}

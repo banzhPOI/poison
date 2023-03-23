@@ -1,17 +1,16 @@
 spring:
   datasource:
-    url:
-    username:
-    password:
+    url: ${config.mysql.url}
+    username: ${config.mysql.username}
+    password: ${config.mysql.password}
     driver-class-name: com.mysql.cj.jdbc.Driver
   data:
     redis:
-      host:
-      password:
+      host: ${config.redis.address}
+      password: ${config.redis.password}
   cloud:
-    consul:
-      host:
-      port: 80
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
       discovery:
-        instance-id: ${spring.application.name}
-        register: true
+        server-addr: 127.0.0.1:8848

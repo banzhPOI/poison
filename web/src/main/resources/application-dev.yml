@@ -1,7 +1,0 @@
-spring:
-  cloud:
-    consul:
-      host:
-      port: 80
-      discovery:
-        instance-id: ${spring.application.name}

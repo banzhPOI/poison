@@ -31,6 +31,7 @@
         <bootstrap.version>4.0.0</bootstrap.version>
         <gitflow.version>1.19.0</gitflow.version>
         <mybatis.version>3.0.1</mybatis.version>
+        <nacos.version>2022.0.0.0-RC1</nacos.version>
     </properties>
 
     <dependencyManagement>
@@ -113,7 +114,16 @@
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${nacos.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${nacos.version}</version>
+            </dependency>
 
             <!--service-->
             <dependency>
