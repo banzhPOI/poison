@@ -2,17 +2,13 @@ package org.poison.elasticsearch.controller;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
-
+import jakarta.annotation.Resource;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-
-import javax.annotation.Resource;
 
 @Slf4j
 @RestController
@@ -28,9 +24,9 @@ public class TestController {
     public void add() {
         CreateIndexResponse createIndexResponse = null;
         createIndexResponse = elasticsearchClient.indices()
-            .create(createIndexRequest ->
-                createIndexRequest.index("elasticsearch-client")
-            );
+                .create(createIndexRequest ->
+                        createIndexRequest.index("elasticsearch-client")
+                );
 
         log.info("== {} 索引创建是否成功: {}", "elasticsearch-client", createIndexResponse.acknowledged());
 

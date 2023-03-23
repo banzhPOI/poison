@@ -23,7 +23,6 @@
         <module>test</module>
         <module>web</module>
         <module>order</module>
-        <module>flow</module>
     </modules>
 
     <build>
