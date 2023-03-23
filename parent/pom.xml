@@ -20,6 +20,7 @@
         <starter.version>0.0.1-SNAPSHOT</starter.version>
         <common.version>0.0.1-SNAPSHOT</common.version>
         <compactqueue.version>0.0.1-SNAPSHOT</compactqueue.version>
+        <methodidempotent.version>0.0.1-SNAPSHOT</methodidempotent.version>
 
         <order.version>0.0.1-SNAPSHOT</order.version>
 
@@ -81,7 +82,11 @@
                 <artifactId>compactqueue</artifactId>
                 <version>${compactqueue.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.poison</groupId>
+                <artifactId>methodidempotent</artifactId>
+                <version>${methodidempotent.version}</version>
+            </dependency>
             <!--external-->
             <dependency>
                 <groupId>org.redisson</groupId>

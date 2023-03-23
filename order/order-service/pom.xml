@@ -29,8 +29,7 @@
         </dependency>
         <dependency>
             <groupId>org.poison</groupId>
-            <artifactId>methodIdempotent</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <artifactId>methodidempotent</artifactId>
         </dependency>
     </dependencies>
 
