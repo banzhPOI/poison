@@ -23,6 +23,7 @@
         <methodidempotent.version>0.0.1-SNAPSHOT</methodidempotent.version>
 
         <order.version>0.0.1-SNAPSHOT</order.version>
+        <account.version>0.0.1-SNAPSHOT</account.version>
 
         <redisson.version>3.18.1</redisson.version>
         <elasticsearch.version>7.16.2</elasticsearch.version>
@@ -130,6 +131,11 @@
                 <groupId>org.poison</groupId>
                 <artifactId>order-interface</artifactId>
                 <version>${order.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.poison</groupId>
+                <artifactId>account-interface</artifactId>
+                <version>${account.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
