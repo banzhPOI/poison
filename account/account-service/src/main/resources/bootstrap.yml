@@ -1,0 +1,10 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: banzh-account-service
+  cloud:
+    nacos:
+      config:
+        file-extension: yml

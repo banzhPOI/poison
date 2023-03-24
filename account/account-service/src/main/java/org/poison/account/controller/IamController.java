@@ -1,0 +1,28 @@
+package org.poison.account.controller;
+
+import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
+import org.poison.account.client.IamClient;
+import org.poison.account.core.req.LoginRequest;
+import org.poison.account.core.resp.LoginResponse;
+import org.poison.account.service.IamService;
+import org.springframework.web.bind.annotation.RestController;
+
+@Slf4j
+@RestController
+public class IamController implements IamClient {
+
+    @Resource
+    private IamService loginService;
+
+    @Override
+    public LoginResponse doLogin(LoginRequest loginRequest) {
+        return loginService.doLogin(loginRequest);
+    }
+
+
+    @Override
+    public void logout() {
+//        return "当前会话是否登录：" + StpUtil.isLogin();
+    }
+}
