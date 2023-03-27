@@ -21,6 +21,7 @@
         <module>template</module>
         <module>cloud-template</module>
         <module>test</module>
+        <module>gateway</module>
         <module>web</module>
         <module>order</module>
         <module>account</module>

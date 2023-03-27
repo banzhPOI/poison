@@ -1,0 +1,12 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: banzh-gateway
+  cloud:
+    nacos:
+      config:
+        file-extension: yml
+  main:
+    web-application-type: reactive
