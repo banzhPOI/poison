@@ -16,6 +16,10 @@ public class Response<T> {
         this.content = content;
     }
 
+    public static <T> Response<T> success(String msg) {
+        return new Response<>(ResponseCode.SUCCESS, msg, null);
+    }
+
     public static <T> Response<T> success(T content) {
         return new Response<>(ResponseCode.SUCCESS, null, content);
     }
