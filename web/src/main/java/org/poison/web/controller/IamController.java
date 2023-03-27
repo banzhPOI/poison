@@ -32,7 +32,7 @@ public class IamController extends BaseController {
     @PostMapping(value = "logout")
     public Response<?> logout() {
         LogoutRequest logoutRequest = new LogoutRequest();
-        logoutRequest.setUserId(getCurrentUserId());
+        logoutRequest.setUserId(getCurrentUser().getId());
         iamClient.logout(logoutRequest);
         return Response.success("登出成功");
     }

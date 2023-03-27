@@ -1,5 +1,6 @@
 package org.poison.account.service.impl;
 
+import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import jakarta.annotation.Resource;
@@ -24,7 +25,7 @@ public class IamServiceImpl implements IamService {
             throw new BizException("用户不存在或密码错误");
         }
         UserDTO user = userService.findUserByUsername(loginRequest.getUsername());
-        StpUtil.login(user.getId());
+        StpUtil.login(user.getId(), new SaLoginModel().setIsWriteHeader(false));
         SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
         return new LoginResponse(user.getId(), tokenInfo.getTokenName(), tokenInfo.getTokenValue());
     }

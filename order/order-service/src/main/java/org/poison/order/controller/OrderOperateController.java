@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.poison.order.client.OrderOperateClient;
 import org.poison.order.core.req.OrderOperateRequest;
 import org.poison.order.core.req.OrderUpdateRequest;
-import org.poison.order.core.resp.OrderDetailResponse;
+import org.poison.order.core.resp.OrderDetailVO;
 import org.poison.order.service.OrderOperateService;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,7 +45,7 @@ public class OrderOperateController implements OrderOperateClient {
      * 订单变更
      */
     @Override
-    public OrderDetailResponse update(OrderUpdateRequest updateRequest) {
+    public OrderDetailVO update(OrderUpdateRequest updateRequest) {
         return orderOperateService.update(updateRequest);
     }
 }

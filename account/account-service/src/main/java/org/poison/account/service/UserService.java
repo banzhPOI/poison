@@ -8,6 +8,5 @@ public interface UserService {
 
     UserDTO findUserByUsername(String username);
 
-
     boolean checkUser(String username,String password);
 }

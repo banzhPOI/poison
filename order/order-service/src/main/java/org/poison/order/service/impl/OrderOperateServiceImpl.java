@@ -6,7 +6,7 @@ import org.poison.order.components.DocLockComponent;
 import org.poison.order.core.enums.OrderStatus;
 import org.poison.order.core.req.OrderOperateRequest;
 import org.poison.order.core.req.OrderUpdateRequest;
-import org.poison.order.core.resp.OrderDetailResponse;
+import org.poison.order.core.resp.OrderDetailVO;
 import org.poison.order.dao.OrderDao;
 import org.poison.order.event.order.OrderCancel;
 import org.poison.order.event.order.OrderPass;
@@ -73,7 +73,7 @@ public class OrderOperateServiceImpl implements OrderOperateService {
      * 所以要先加锁判断
      */
     @Override
-    public OrderDetailResponse update(OrderUpdateRequest req) {
+    public OrderDetailVO update(OrderUpdateRequest req) {
         RLock lock = lockComponent.getOrderLock(req.getId());
         try {
             OrderDTO orderDTO = orderDao.findById(req.getId());

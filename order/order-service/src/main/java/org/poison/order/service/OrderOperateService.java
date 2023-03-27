@@ -2,7 +2,7 @@ package org.poison.order.service;
 
 import org.poison.order.core.req.OrderOperateRequest;
 import org.poison.order.core.req.OrderUpdateRequest;
-import org.poison.order.core.resp.OrderDetailResponse;
+import org.poison.order.core.resp.OrderDetailVO;
 
 public interface OrderOperateService {
 
@@ -25,5 +25,5 @@ public interface OrderOperateService {
     /**
      * 订单更新
      */
-    OrderDetailResponse update(OrderUpdateRequest updateRequest);
+    OrderDetailVO update(OrderUpdateRequest updateRequest);
 }

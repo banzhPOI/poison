@@ -3,18 +3,18 @@ package org.poison.order.service;
 import org.poison.common.page.PageResult;
 import org.poison.order.core.req.OrderCreateRequest;
 import org.poison.order.core.req.OrderSearchRequest;
-import org.poison.order.core.resp.OrderDetailResponse;
+import org.poison.order.core.resp.OrderDetailVO;
 
 public interface OrderService {
 
     /**
      * 订单创建
      */
-    OrderDetailResponse create(OrderCreateRequest createRequest);
+    OrderDetailVO create(OrderCreateRequest createRequest);
 
     /**
      * 订单检索
      */
-    PageResult<OrderDetailResponse> search(OrderSearchRequest searchRequest);
+    PageResult<OrderDetailVO> search(OrderSearchRequest searchRequest);
 
 }
