@@ -1,6 +1,7 @@
 package org.poison.account.client;
 
 import org.poison.account.core.req.LoginRequest;
+import org.poison.account.core.req.LogoutRequest;
 import org.poison.account.core.resp.LoginResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface IamClient {
 
     @PostMapping("iam/login")
-    LoginResponse doLogin(@RequestBody LoginRequest loginRequest);
+    LoginResponse login(@RequestBody LoginRequest loginRequest);
 
     @PostMapping("iam/logout")
-    void logout();
+    void logout(@RequestBody LogoutRequest logoutRequest);
 
 }

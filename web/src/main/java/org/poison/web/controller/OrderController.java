@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("orders")
-public class OrderController {
+public class OrderController extends BaseController {
 
     @Resource
     private OrderClient orderClient;

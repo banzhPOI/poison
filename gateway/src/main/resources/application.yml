@@ -1,4 +1,8 @@
 spring:
+  data:
+    redis:
+      host: ${config.redis.address}
+      password: ${config.redis.password}
   cloud:
     nacos:
       config:
