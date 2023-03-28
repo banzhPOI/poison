@@ -15,22 +15,27 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class WebControllerAdvice {
 
+    // 从下层服务传过来的一定走这里
     @ExceptionHandler({BaseException.class})
     public ResponseEntity<Response<?>> handleBaseException(BaseException e) {
         HttpStatus httpStatus;
+        String message;
         if (e instanceof SysException) {
-            log.error("BaseControllerAdvice handleBaseException with error:", e);
+            log.error("BaseControllerAdvice handleBaseException with error: " + " app: " + e.getAppName() + " message: " + e.getMessage());
             httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+            message = "系统异常，请稍后再试";
         } else {
-            log.warn("BaseControllerAdvice handleBaseException with info: " + e.getMessage());
+            log.warn("BaseControllerAdvice handleBaseException with info: " + " app: " + e.getAppName() + " message: " + e.getMessage());
             httpStatus = HttpStatus.BAD_REQUEST;
+            message = e.getMessage();
         }
-        return new ResponseEntity<>(Response.fail(e.getMessage()), httpStatus);
+        return new ResponseEntity<>(Response.fail(message), httpStatus);
     }
 
+    // 这里理论上只有当前服务的异常
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Response<?>> handlerException(Exception e) {
         log.error("BaseControllerAdvice handleException with error:", e);
-        return new ResponseEntity<>(Response.fail(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(Response.fail("系统异常，请稍后再试"), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

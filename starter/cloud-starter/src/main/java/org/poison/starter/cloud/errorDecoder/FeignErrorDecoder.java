@@ -6,10 +6,13 @@ import feign.Response;
 import feign.Util;
 import feign.codec.ErrorDecoder;
 import lombok.extern.slf4j.Slf4j;
-import org.poison.common.exception.SysException;
+import org.poison.common.exception.BaseException;
+
+import java.nio.charset.StandardCharsets;
 
 @Slf4j
-public class FeignErrorDecoder implements ErrorDecoder {
+public class FeignErrorDecoder extends ErrorDecoder.Default {
+
 
     ObjectMapper objectMapperWithType = new ObjectMapper()
             .enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL)
@@ -19,12 +22,11 @@ public class FeignErrorDecoder implements ErrorDecoder {
     public Exception decode(String methodKey, Response response) {
 
         try {
-            String body = Util.toString(response.body().asReader());
-            //规范是将Exception序列化之后放在ResponseBean.data里
-            return objectMapperWithType.readValue(body, Exception.class);
+            String body = Util.toString(response.body().asReader(StandardCharsets.UTF_8));
+            return objectMapperWithType.readValue(body, BaseException.class);
         } catch (Exception e) {
-
-            return new SysException(methodKey);
+            // 如果这里抛异常则说明没有走feign的controllerAdvice,需要对异常继续处理,用默认的处理方案,并且属于系统错误
+            return super.decode(methodKey, response);
         }
     }
 }

@@ -6,6 +6,16 @@ public abstract class BaseException extends RuntimeException {
 
     private String errCode;
 
+    private String appName;
+
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
+
     public BaseException(String errMessage) {
         super(errMessage);
     }
