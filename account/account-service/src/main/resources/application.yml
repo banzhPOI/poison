@@ -8,12 +8,7 @@ spring:
     redis:
       host: ${config.redis.address}
       password: ${config.redis.password}
-  cloud:
-    nacos:
-      config:
-        server-addr: 127.0.0.1:8848
-      discovery:
-        server-addr: 127.0.0.1:8848
+
 
 sa-token:
   # token名称 (同时也是cookie名称)

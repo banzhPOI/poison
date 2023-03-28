@@ -1,14 +1,13 @@
+sa-token:
+  # token名称 (同时也是cookie名称)
+  token-name: authorization
+
 spring:
   data:
     redis:
       host: ${config.redis.address}
       password: ${config.redis.password}
   cloud:
-    nacos:
-      config:
-        server-addr: 127.0.0.1:8848
-      discovery:
-        server-addr: 127.0.0.1:8848
     gateway:
       routes:
       - id: banzh-web
@@ -17,6 +16,3 @@ spring:
         - Path=/web/**
         filters:
           - StripPrefix=1
-sa-token:
-  # token名称 (同时也是cookie名称)
-  token-name: authorization

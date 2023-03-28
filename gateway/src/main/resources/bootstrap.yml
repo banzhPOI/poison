@@ -6,7 +6,10 @@ spring:
     name: banzh-gateway
   cloud:
     nacos:
+      server-addr: 127.0.0.1:8848
       config:
+        prefix: base-config
         file-extension: yml
+
   main:
     web-application-type: reactive
