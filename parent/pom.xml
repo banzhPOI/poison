@@ -33,6 +33,7 @@
         <gitflow.version>1.19.0</gitflow.version>
         <mybatis.version>3.0.1</mybatis.version>
         <nacos.version>2022.0.0.0-RC1</nacos.version>
+        <as-token.version>1.34.0</as-token.version>
     </properties>
 
     <dependencyManagement>
@@ -124,6 +125,21 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
                 <version>${nacos.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot3-starter</artifactId>
+                <version>${as-token.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-reactor-spring-boot3-starter</artifactId>
+                <version>${as-token.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-dao-redis-jackson</artifactId>
+                <version>${as-token.version}</version>
             </dependency>
 
             <!--service-->
