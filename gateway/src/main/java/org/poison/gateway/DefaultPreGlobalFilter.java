@@ -14,7 +14,7 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 @Component
-public class SaGlobalFilter implements GlobalFilter {
+public class DefaultPreGlobalFilter implements GlobalFilter {
 
     @Resource
     private ObjectMapper objectMapper;

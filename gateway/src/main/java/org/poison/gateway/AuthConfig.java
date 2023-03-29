@@ -3,7 +3,6 @@ package org.poison.gateway;
 import cn.dev33.satoken.reactor.filter.SaReactorFilter;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
-import cn.dev33.satoken.util.SaResult;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.Resource;
@@ -17,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
  * @author kong
  */
 @Configuration
-public class SaTokenConfigure {
+public class AuthConfig {
 
     @Resource
     private ObjectMapper objectMapper;
