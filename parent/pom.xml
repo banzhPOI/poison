@@ -63,6 +63,11 @@
             </dependency>
             <dependency>
                 <groupId>org.poison</groupId>
+                <artifactId>redis-starter</artifactId>
+                <version>${starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.poison</groupId>
                 <artifactId>elasticsearch-starter</artifactId>
                 <version>${starter.version}</version>
             </dependency>

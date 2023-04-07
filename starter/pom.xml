@@ -29,6 +29,7 @@
         <module>snowflake-starter</module>
         <module>cloud-starter</module>
         <module>mybatis-starter</module>
+        <module>redis-starter</module>
     </modules>
 
 </project>
