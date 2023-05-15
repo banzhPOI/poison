@@ -1,6 +1,7 @@
 package org.poison.order.event;
 
 import jakarta.annotation.Resource;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.poison.common.exception.BizException;
 import org.poison.order.core.enums.BaseStatus;
@@ -84,6 +85,7 @@ public abstract class BaseEvent {
      * 4.变更状态
      * 5.假如失败了，还应该记录一下原因
      */
+    @SneakyThrows
     public void fireEvent(BaseEventRequest req) {
         try {
             lock = redisson.getLock(getDocPrefix() + req.getDocId());
@@ -112,6 +114,7 @@ public abstract class BaseEvent {
             String failReason = "doc: " + req.getDocId() + " fire event: " + this.getClass().getSimpleName() + " failed, reason: " + e.getMessage();
             log.error("fire_event_failed: {}", failReason);
             updateFailReason(req.getDocId(), failReason);
+            throw e;
         } finally {
             //解锁
             if (lock.isLocked() && lock.isHeldByCurrentThread()) {

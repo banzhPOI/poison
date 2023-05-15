@@ -22,33 +22,33 @@
     </sql>
 
     <insert id="addOrder">
-        INSERT INTO jidu_odin.bzh_order (<include refid="allColumns"/>)
+        INSERT INTO poison.order (<include refid="allColumns"/>)
     VALUES (#{id}, #{orderNo}, #{status}, now(3), now(3), #{operatorId}, #{operatorName})
     </insert>
 
     <select id="findById" resultMap="orderMap">
         SELECT
         <include refid="allColumns" />
-        FROM jidu_odin.bzh_order
+        FROM poison.order
         WHERE id = #{id}
     </select>
 
     <update id="updateStatusById">
-        UPDATE jidu_odin.bzh_order
+        UPDATE poison.order
         SET `status` = #{status},
         update_time = NOW(3)
         WHERE id = #{id}
     </update>
 
     <update id="updateFailReasonById">
-        UPDATE jidu_odin.bzh_order
+        UPDATE poison.order
         SET failReason = #{failReason},
         update_time = NOW(3)
         WHERE id = #{id}
     </update>
 
     <update id="updateOrder">
-        UPDATE jidu_odin.bzh_order
+        UPDATE poison.order
         SET operator_id = #{operatorId},
         operator_name = #{operatorName},
         update_time = now(3)
