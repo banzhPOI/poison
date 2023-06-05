@@ -4,6 +4,7 @@ package org.poison.starter.cloud.controllerAdvice;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.poison.common.exception.BaseException;
@@ -23,7 +24,7 @@ public class FeignControllerAdvice {
     private String appName;
 
     ObjectMapper objectMapperWithType = new ObjectMapper()
-            .enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL)
+            .activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL)
             .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
     @ExceptionHandler({BaseException.class})

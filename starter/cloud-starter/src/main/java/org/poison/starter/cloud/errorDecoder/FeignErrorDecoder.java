@@ -2,6 +2,7 @@ package org.poison.starter.cloud.errorDecoder;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
 import feign.Response;
 import feign.Util;
 import feign.codec.ErrorDecoder;
@@ -15,7 +16,7 @@ public class FeignErrorDecoder extends ErrorDecoder.Default {
 
 
     ObjectMapper objectMapperWithType = new ObjectMapper()
-            .enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL)
+            .activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL)
             .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
     @Override
