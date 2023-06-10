@@ -10,3 +10,4 @@ spring:
       config:
         prefix: base-config
         file-extension: yml
+        group: PROD
