@@ -1,9 +1,7 @@
 package org.poison.gateway;
 
-import cn.dev33.satoken.reactor.filter.SaReactorFilter;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.Resource;
 import org.poison.common.constant.GlobalConstant;
@@ -13,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * [Sa-Token 权限认证] 配置类
+ *
  * @author kong
  */
 @Configuration
@@ -43,13 +42,6 @@ public class AuthConfig {
                     // 更多匹配 ...  */
                 })
                 // 异常处理方法：每次setAuth函数出现异常时进入
-                .setError(e -> {
-                    try {
-                        return objectMapper.writeValueAsString(Response.fail(e.getMessage()));
-                    } catch (JsonProcessingException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                });
-
+                .setError(e -> Response.fail(e.getMessage()));
     }
 }
