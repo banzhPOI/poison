@@ -6,8 +6,8 @@ spring:
     name: banzh-account-service
   cloud:
     nacos:
-      server-addr: 127.0.0.1:8848
+      server-addr: nacos-service:8848
       config:
         prefix: base-config
         file-extension: yml
-        group: DEV
+        group: PROD
