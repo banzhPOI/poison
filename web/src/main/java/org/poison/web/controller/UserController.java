@@ -3,7 +3,7 @@ package org.poison.web.controller;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.poison.account.client.UserClient;
-import org.poison.account.core.req.RegisterRequest;
+import org.poison.account.core.req.UserRegisterRequest;
 import org.poison.account.core.resp.LoginResponse;
 import org.poison.common.response.Response;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +20,7 @@ public class UserController extends BaseController {
     private UserClient userClient;
 
     @PostMapping(value = "register")
-    public Response<LoginResponse> login(@RequestBody RegisterRequest request) {
+    public Response<LoginResponse> login(@RequestBody UserRegisterRequest request) {
         userClient.register(request);
         return Response.success();
     }
