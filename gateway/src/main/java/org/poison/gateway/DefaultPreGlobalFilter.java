@@ -24,7 +24,7 @@ public class DefaultPreGlobalFilter implements GlobalFilter {
         ServerHttpRequest newRequest = exchange
                 .getRequest();
         // 排除掉登录的url
-        if (!GlobalConstant.LOGIN_URL.contains(newRequest.getURI().getPath())) {
+        if (!GlobalConstant.LOGIN_URL.contains(newRequest.getURI().getPath()) && !GlobalConstant.REGISTER_URL.contains(newRequest.getURI().getPath())) {
             try {
                 newRequest.mutate()
                         // 为请求追加 CURRENT_USER 参数
