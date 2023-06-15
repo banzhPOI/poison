@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: banzh-account-service
+    name: poison-account-service
   cloud:
     nacos:
       server-addr: nacos-service:8848

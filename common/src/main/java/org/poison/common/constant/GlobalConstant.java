@@ -6,4 +6,6 @@ public class GlobalConstant {
 
     public static final String LOGIN_URL = "/web/iam/login";
 
+    public static final String REGISTER_URL = "/web/user/register";
+
 }

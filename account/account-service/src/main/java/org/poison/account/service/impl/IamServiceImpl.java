@@ -21,10 +21,10 @@ public class IamServiceImpl implements IamService {
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
-        if (!userService.checkUser(loginRequest.getUsername(), loginRequest.getPassword())) {
+        UserDTO user = userService.checkUser(loginRequest.getLoginKey(), loginRequest.getPassword());
+        if (user == null) {
             throw new BizException("用户不存在或密码错误");
         }
-        UserDTO user = userService.findUserByUsername(loginRequest.getUsername());
         StpUtil.login(user.getId(), new SaLoginModel().setIsWriteHeader(false));
         SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
         return new LoginResponse(user.getId(), tokenInfo.getTokenName(), tokenInfo.getTokenValue());

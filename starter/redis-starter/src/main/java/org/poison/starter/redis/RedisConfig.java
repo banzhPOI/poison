@@ -25,7 +25,7 @@ public class RedisConfig {
         //单节点模式
         SingleServerConfig singleServerConfig = conf.useSingleServer();
         //设置连接地址
-        singleServerConfig.setAddress("redis://"+host);
+        singleServerConfig.setAddress("redis://" + host + ":6379");
         //设置连接密码
         singleServerConfig.setPassword(password);
         //使用json序列化方式

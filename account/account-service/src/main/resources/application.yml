@@ -6,7 +6,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   data:
     redis:
-      host: ${config.redis.address}
+      host: ${config.redis.host}
       password: ${config.redis.password}
 
 

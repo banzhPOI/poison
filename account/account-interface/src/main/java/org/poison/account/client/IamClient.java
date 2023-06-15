@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "banzh-account-service", contextId = "iam")
+@FeignClient(name = "poison-account-service", contextId = "iam")
 public interface IamClient {
 
     @PostMapping("iam/login")
