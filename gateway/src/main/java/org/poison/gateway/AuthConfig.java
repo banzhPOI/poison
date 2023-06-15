@@ -32,6 +32,7 @@ public class AuthConfig {
                 .setAuth(obj -> {
                     // 登录校验 -- 拦截所有路由，并排除/iam/login 用于开放登录
                     SaRouter.match("/**", GlobalConstant.LOGIN_URL, r -> StpUtil.checkLogin());
+                    SaRouter.match("/**", GlobalConstant.REGISTER_URL, r -> StpUtil.checkLogin());
 
                     // 权限认证 -- 不同模块, 校验不同权限
 //                    SaRouter.match("/user/**", r -> StpUtil.checkPermission("user"));

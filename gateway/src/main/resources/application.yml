@@ -5,13 +5,13 @@ sa-token:
 spring:
   data:
     redis:
-      host: ${config.redis.address}
+      host: ${config.redis.host}
       password: ${config.redis.password}
   cloud:
     gateway:
       routes:
-      - id: banzh-web
-        uri: lb://banzh-web
+      - id: poison-web
+        uri: lb://poison-web
         predicates:
         - Path=/web/**
         filters:

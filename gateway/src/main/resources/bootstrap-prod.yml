@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: banzh-gateway
+    name: poison-gateway
   cloud:
     nacos:
       server-addr: nacos-service:8848
