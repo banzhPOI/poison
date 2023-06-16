@@ -3,7 +3,7 @@
 <mapper namespace="org.poison.account.mapper.UserMapper">
     <resultMap id="userMap" type="org.poison.account.pojo.entity.User">
         <id column="id" property="id" jdbcType="VARCHAR"/>
-        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
         <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="VARCHAR"/>
@@ -14,7 +14,7 @@
 
     <sql id="allColumns">
         id,
-        username,
+        nickname,
         email,
         mobile,
         `status`,
@@ -25,7 +25,7 @@
 
     <insert id="register">
         INSERT INTO poison.user (<include refid="allColumns"/>)
-    VALUES (#{id}, #{username}, #{email}, #{mobile}, #{status}, #{password}, now(3), now(3))
+        VALUES (#{id}, #{nickname}, #{email}, #{mobile}, #{status}, #{password}, now(3), now(3))
     </insert>
 
     <select id="findById" resultMap="userMap">
@@ -40,7 +40,7 @@
         <include refid="allColumns"/>
         FROM poison.user
         WHERE password = #{password}
-          AND (username = #{loginKey} OR email = #{loginKey} OR mobile = #{loginKey})
+          AND (email = #{loginKey} OR mobile = #{loginKey})
           AND status != 'BANED'
     </select>
 </mapper>

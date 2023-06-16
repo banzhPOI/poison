@@ -7,5 +7,5 @@ public class UserVO {
 
     private String id;
 
-    private String username;
+    private String nickname;
 }

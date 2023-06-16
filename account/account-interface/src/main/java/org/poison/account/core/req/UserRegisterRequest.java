@@ -7,7 +7,7 @@ import org.poison.common.exception.BizException;
 @Data
 public class UserRegisterRequest {
 
-    private String username;
+    private String nickname;
 
     private String email;
 
@@ -17,7 +17,7 @@ public class UserRegisterRequest {
 
     public void checkParam() {
         // 不能全为空
-        if (StringUtils.isAllBlank(email, mobile, username)) {
+        if (StringUtils.isAllBlank(email, mobile)) {
             throw new BizException("请输入正确的注册信息");
         }
         if (StringUtils.isBlank(password)) {

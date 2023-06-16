@@ -28,4 +28,8 @@ public abstract class BaseController {
         userGetRequest.setUserId(userId);
         return userClient.findUserById(userGetRequest);
     }
+
+    protected String getCurrentUserId() {
+        return request.getHeader(GlobalConstant.CURRENT_USER);
+    }
 }

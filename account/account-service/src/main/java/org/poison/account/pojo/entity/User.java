@@ -14,7 +14,7 @@ public class User {
 
     private String id;
 
-    private String username;
+    private String nickname;
 
     private String email;
 
@@ -34,7 +34,7 @@ public class User {
         }
         User user = new User();
         user.setId("U" + IdUtils.get());
-        user.setUsername(StringUtils.defaultString(request.getUsername()));
+        user.setNickname(StringUtils.defaultString(request.getNickname()));
         user.setEmail(StringUtils.defaultString(request.getEmail()));
         user.setMobile(StringUtils.defaultString(request.getMobile()));
         user.setStatus(UserStatus.NORMAL);

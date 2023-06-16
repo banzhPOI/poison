@@ -12,7 +12,7 @@ public class UserDTO {
 
     private String id;
 
-    private String username;
+    private String nickname;
 
     private String email;
 
@@ -30,7 +30,7 @@ public class UserDTO {
         }
         UserDTO dto = new UserDTO();
         dto.setId(user.getId());
-        dto.setUsername(user.getUsername());
+        dto.setNickname(user.getNickname());
         dto.setMobile(user.getMobile());
         dto.setStatus(user.getStatus());
         dto.setCreateTime(user.getCreateTime());
@@ -44,7 +44,7 @@ public class UserDTO {
         }
         UserVO vo = new UserVO();
         vo.setId(dto.getId());
-        vo.setUsername(dto.getUsername());
+        vo.setNickname(dto.getNickname());
         return vo;
     }
 }
