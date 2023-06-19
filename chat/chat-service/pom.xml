@@ -18,6 +18,10 @@
             <artifactId>chat-interface</artifactId>
             <version>${parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.corundumstudio.socketio</groupId>
+            <artifactId>netty-socketio</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
