@@ -1,4 +1,4 @@
-package org.poison.chat.listener;
+package org.poison.chat.socket.listener.listener;
 
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
@@ -7,7 +7,7 @@ import com.corundumstudio.socketio.annotation.OnDisconnect;
 import com.corundumstudio.socketio.annotation.OnEvent;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.poison.chat.service.ChatService;
+import org.poison.chat.http.service.ChatService;
 import org.springframework.stereotype.Component;
 
 @Slf4j

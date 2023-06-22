@@ -1,4 +1,4 @@
-package org.poison.chat.service;
+package org.poison.chat.http.service;
 
 public interface ChatService {
 

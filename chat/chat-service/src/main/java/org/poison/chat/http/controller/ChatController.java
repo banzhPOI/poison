@@ -1,11 +1,10 @@
-package org.poison.chat.controller;
+package org.poison.chat.http.controller;
 
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.poison.chat.client.ChatClient;
 import org.poison.chat.core.req.ChatMessage;
-import org.poison.chat.service.ChatService;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.poison.chat.http.service.ChatService;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j

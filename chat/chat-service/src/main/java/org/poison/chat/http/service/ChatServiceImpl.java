@@ -1,4 +1,4 @@
-package org.poison.chat.service;
+package org.poison.chat.http.service;
 
 import com.corundumstudio.socketio.SocketIOServer;
 import jakarta.annotation.Resource;

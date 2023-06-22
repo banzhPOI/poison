@@ -1,6 +1,7 @@
-package org.poison.chat.config;
+package org.poison.chat.socket.config;
 
 import com.corundumstudio.socketio.Configuration;
+import com.corundumstudio.socketio.SocketConfig;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +21,6 @@ public class SocketIOConfig {
         Configuration config = new Configuration();
         config.setHostname(host);
         config.setPort(port);
-
         SocketIOServer server = new SocketIOServer(config);
         server.start();
         return server;
