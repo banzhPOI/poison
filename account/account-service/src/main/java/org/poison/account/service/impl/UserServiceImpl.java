@@ -23,11 +23,12 @@ public class UserServiceImpl implements UserService {
         }
         // 静态校验
         request.checkParam();
-        try {
-            userMapper.register(User.fromRegisterRequest(request));
-        } catch (DataIntegrityViolationException e) {
+        // 校验用户是否已存在
+        User user = userMapper.findByLoginKey(request);
+        if (user != null) {
             throw new BizException("手机号或邮箱已被注册");
         }
+        userMapper.register(User.fromRegisterRequest(request));
     }
 
     @Override

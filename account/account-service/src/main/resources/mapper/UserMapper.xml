@@ -28,6 +28,13 @@
         VALUES (#{id}, #{nickname}, #{email}, #{mobile}, #{status}, #{password}, now(3), now(3))
     </insert>
 
+    <select id="findByLoginKey" resultMap="userMap">
+        SELECT
+        <include refid="allColumns"/>
+        FROM poison.user
+        WHERE email = #{email} OR mobile = #{mobile}
+    </select>
+
     <select id="findById" resultMap="userMap">
         SELECT
         <include refid="allColumns"/>
