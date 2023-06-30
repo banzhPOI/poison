@@ -1,8 +1,5 @@
 spring:
-  cloud:
-    consul:
-      host: 
-      port: 80
-      discovery:
-        instance-id: ${spring.application.name}
-        register: true
+  data:
+    redis:
+      host: ${config.redis.host}
+      password: ${config.redis.password}

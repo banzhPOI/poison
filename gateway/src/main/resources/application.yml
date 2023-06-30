@@ -17,6 +17,8 @@ spring:
         filters:
           - StripPrefix=1
       - id: poison-chat
-        uri: lb://poison-chat:8081
+        uri: lb://poison-chat-netty-service
         predicates:
-          - Path=/socket.io/**
+        - Path=/ws/**
+        filters:
+          - StripPrefix=1
