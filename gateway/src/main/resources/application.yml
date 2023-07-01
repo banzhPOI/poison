@@ -22,3 +22,9 @@ spring:
         - Path=/ws/**
         filters:
           - StripPrefix=1
+      - id: poison-chat-ws
+        uri: lb:ws//poison-chat-netty-service
+        predicates:
+          - Path=/ws/socket.io/**
+        filters:
+          - StripPrefix=1

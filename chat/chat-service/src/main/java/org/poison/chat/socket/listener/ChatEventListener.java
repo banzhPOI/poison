@@ -1,4 +1,4 @@
-package org.poison.chat.socket.listener.listener;
+package org.poison.chat.socket.listener;
 
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
@@ -16,7 +16,6 @@ public class ChatEventListener {
 
     @Resource
     private ChatService service;
-
 
     @OnConnect
     public void onConnect(SocketIOClient client) {

@@ -2,12 +2,16 @@ package org.poison.chat.socket.config;
 
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOServer;
+import com.corundumstudio.socketio.Transport;
 import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
+import com.corundumstudio.socketio.store.RedissonStoreFactory;
+import jakarta.annotation.Resource;
+import org.poison.common.util.NetworkUtils;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.io.IOException;
 
 @org.springframework.context.annotation.Configuration
 public class SocketIOConfig {
@@ -15,11 +19,16 @@ public class SocketIOConfig {
     @Value("${spring.netty.application.port}")
     private Integer nettyServicePort;
 
+    @Resource
+    private RedissonClient redissonClient;
+
     @Bean
-    public SocketIOServer socketIOServer() throws UnknownHostException {
+    public SocketIOServer socketIOServer() throws IOException {
         Configuration config = new Configuration();
-        config.setHostname(InetAddress.getLocalHost().getHostAddress());
+        config.setHostname(NetworkUtils.getLocalHostExactAddress().getHostAddress());
         config.setPort(nettyServicePort);
+        config.setTransports(Transport.WEBSOCKET); // 只启用 WebSocket 传输方式
+        config.setStoreFactory(new RedissonStoreFactory(redissonClient));
         SocketIOServer server = new SocketIOServer(config);
         server.start();
         return server;
