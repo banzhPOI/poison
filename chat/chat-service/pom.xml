@@ -26,6 +26,15 @@
             <groupId>org.poison</groupId>
             <artifactId>redis-starter</artifactId>
         </dependency>
+        <!-- Sa-Token 权限认证, 在线文档：https://sa-token.cc/ -->
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-spring-boot3-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-dao-redis-jackson</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
