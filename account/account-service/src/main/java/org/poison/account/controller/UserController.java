@@ -10,6 +10,8 @@ import org.poison.account.pojo.dto.UserDTO;
 import org.poison.account.service.UserService;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 public class UserController implements UserClient {
@@ -20,6 +22,11 @@ public class UserController implements UserClient {
     @Override
     public void register(UserRegisterRequest request) {
         userService.register(request);
+    }
+
+    @Override
+    public List<UserVO> getAllUserList() {
+        return UserDTO.toVO(userService.getAllUserList());
     }
 
     @Override

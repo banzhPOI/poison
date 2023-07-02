@@ -7,8 +7,9 @@ import org.poison.account.pojo.dto.UserDTO;
 import org.poison.account.pojo.entity.User;
 import org.poison.account.service.UserService;
 import org.poison.common.exception.BizException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -34,6 +35,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO checkUser(String loginKey, String password) {
         return UserDTO.fromEntity(userMapper.checkUser(loginKey, password));
+    }
+
+    @Override
+    public List<UserDTO> getAllUserList() {
+        List<User> userList = userMapper.getAll();
+        return UserDTO.fromEntity(userList);
     }
 
     @Override

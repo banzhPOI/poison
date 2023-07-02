@@ -27,10 +27,13 @@ public class SocketIOConfig {
 
     @Resource
     private SaTokenAuthListener saTokenAuthListener;
+
     @Resource
     private MyConnectListener connectListener;
+
     @Resource
     private MyDisconnectListener disconnectListener;
+
     @Bean
     public SocketIOServer socketIOServer() throws IOException {
         Configuration config = new Configuration();
@@ -41,7 +44,7 @@ public class SocketIOConfig {
         config.setAuthorizationListener(saTokenAuthListener);
         config.setStoreFactory(new RedissonStoreFactory(redissonClient));
         SocketIOServer server = new SocketIOServer(config);
-        // 连接
+        // lister
         server.addConnectListener(connectListener);
         server.addDisconnectListener(disconnectListener);
 

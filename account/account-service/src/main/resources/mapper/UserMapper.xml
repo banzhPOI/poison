@@ -35,6 +35,13 @@
         WHERE email = #{email} OR mobile = #{mobile}
     </select>
 
+    <select id="getAll" resultMap="userMap">
+        SELECT
+        <include refid="allColumns"/>
+        FROM poison.user
+        ORDER BY update_time DESC
+    </select>
+
     <select id="findById" resultMap="userMap">
         SELECT
         <include refid="allColumns"/>

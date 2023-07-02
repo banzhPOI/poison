@@ -14,7 +14,7 @@ public class IamComponent {
     private String tokenName;
 
     public boolean checkLogin(HandshakeData data) {
-        return StringUtils.isNotBlank(data.getSingleUrlParam(tokenName));
+        return StringUtils.isNotBlank(getTokenValue(data));
     }
 
     public String getUserId(SocketIOClient client) {
@@ -26,6 +26,15 @@ public class IamComponent {
     }
 
     private String getTokenValue(SocketIOClient client) {
-        return client.getHandshakeData().getSingleUrlParam(tokenName);
+        return getTokenValue(client.getHandshakeData());
+    }
+
+    private String getTokenValue(HandshakeData data) {
+        // 有可能在header也有可能在param里
+        String headerToken = data.getHttpHeaders().get(tokenName);
+        if (StringUtils.isNotBlank(headerToken)) {
+            return headerToken;
+        }
+        return data.getSingleUrlParam(tokenName);
     }
 }

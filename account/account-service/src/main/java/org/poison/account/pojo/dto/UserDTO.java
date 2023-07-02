@@ -4,8 +4,12 @@ import lombok.Data;
 import org.poison.account.core.enums.UserStatus;
 import org.poison.account.core.resp.UserVO;
 import org.poison.account.pojo.entity.User;
+import org.springframework.util.CollectionUtils;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class UserDTO {
@@ -46,5 +50,21 @@ public class UserDTO {
         vo.setId(dto.getId());
         vo.setNickname(dto.getNickname());
         return vo;
+    }
+
+    public static List<UserVO> toVO(List<UserDTO> dtoList) {
+        List<UserVO> resp = new ArrayList<>();
+        if (CollectionUtils.isEmpty(dtoList)) {
+            return resp;
+        }
+        return dtoList.stream().map(UserDTO::toVO).collect(Collectors.toList());
+    }
+
+    public static List<UserDTO> fromEntity(List<User> entityList) {
+        List<UserDTO> resp = new ArrayList<>();
+        if (CollectionUtils.isEmpty(entityList)) {
+            return resp;
+        }
+        return entityList.stream().map(UserDTO::fromEntity).collect(Collectors.toList());
     }
 }
